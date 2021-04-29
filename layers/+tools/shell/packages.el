@@ -38,6 +38,7 @@
     multi-term
     org
     projectile
+    shadowenv
     (shell :location built-in)
     shell-pop
     (term :location built-in)
@@ -47,7 +48,6 @@
     window-purpose
     (multi-vterm :toggle (and module-file-suffix (not (spacemacs/system-is-mswindows))))
     (vterm :toggle (and module-file-suffix (not (spacemacs/system-is-mswindows))))))
-
 
 (defun shell/init-comint ()
   (setq comint-prompt-read-only t)
@@ -198,6 +198,9 @@
   (spacemacs/set-leader-keys
     "p'" #'spacemacs/projectile-shell-pop
     "p$" #'spacemacs/projectile-shell))
+
+(defun shell/pre-init-shadowenv ()
+  (add-to-list 'spacemacs--shadowenv-modes 'comint-mode))
 
 (defun shell/init-shell ()
   (spacemacs/register-repl 'shell 'shell)
