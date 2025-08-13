@@ -81,7 +81,25 @@
     (use-dialog-box nil "Disable dialog boxes since they are unusable in EXWM")
     (exwm-input-line-mode-passthrough t "Pass all keypresses to emacs in line mode.")
     :init
-    (exwm-enable)
+       (setq exwm-input-global-keys
+         `(
+           ([?\M-m] . 'spacemacs-cmds)
+           ([?\s-i] . exwm-input-toggle-keyboard)
+           ([?\s-l] . exwm/exwm-lock)
+           ([?\s-r] . exwm-reset)
+
+           ([?\s-w] . exwm-workspace-switch)
+           ([?\s- ] . (lambda (cmd) 
+                        (interactive (list (read-shell-command "$ ")))
+                        (start-process-shell-command cmd nil cmd)))
+           ;; s-N: Switch to other workspaces or create if doesn't exist.
+           ,@(mapcar (lambda (i)
+                       `(,(kbd (format "s-%d" i)) .
+                         (lambda ()
+                           (interactive)
+                           (exwm-workspace-switch-create ,i))))
+
+    (exwm-wm-mode)
     ;; "Number of workspaces. Defaults to the number of connected displays."
     (unless exwm-workspace-number
       (custom-set-variables '(exwm-workspace-number (/ (length exwm--randr-displays) 2))))
@@ -99,30 +117,7 @@
               (lambda ()
                 (exwm-workspace-rename-buffer exwm-title)))
 
-    ;; Remove ALL bindings
-    (define-key exwm-mode-map "\C-c\C-f" nil)
-    (define-key exwm-mode-map "\C-c\C-h" nil)
-    (define-key exwm-mode-map "\C-c\C-k" nil)
-    (define-key exwm-mode-map "\C-c\C-m" nil)
-    (define-key exwm-mode-map "\C-c\C-q" nil)
-    (define-key exwm-mode-map "\C-c\C-t\C-f" nil)
-    (define-key exwm-mode-map "\C-c\C-t\C-m" nil)
-
-
-    ;; `exwm-input-set-key' allows you to set a global key binding (available in
-    ;; any case). Following are a few examples.
-
-    (exwm-input-set-key (kbd "M-m")     'spacemacs-cmds)
-    (exwm-input-set-key (kbd "C-q")     #'exwm-input-send-next-key)
-    (exwm-input-set-key (kbd "s-i")     #'exwm-input-toggle-keyboard)
-    (exwm-input-set-key (kbd "s-l")     #'exwm/exwm-lock)
-    (exwm-input-set-key (kbd "s-r")     #'exwm-reset)
-
-    (exwm-input-set-key (kbd "s-w")     #'exwm-workspace-switch)
-    (exwm-input-set-key (kbd "s-TAB")   #'exwm/jump-to-last-exwm)
-
-    (exwm-input-set-key (kbd "s-SPC")   #'exwm/exwm-app-launcher)
-    (exwm-input-set-key (kbd "s-RET")   #'exwm-terminal-command)
+    (define-key exwm-mode-map (kbd "C-c") nil)
 
     ;; set up evil escape
     (when (configuration-layer/package-used-p 'evil-escape)
@@ -152,5 +147,4 @@
     (when exwm-autostart-xdg-applications
       (add-hook 'exwm-init-hook 'exwm//autostart-xdg-applications t))
 
-    (exwm-init)
     (server-start)))
