@@ -519,7 +519,7 @@ to disable fullscreen animations on macOS."
 (spacemacs|defc dotspacemacs-maximized-at-startup nil
   "If non nil the frame is maximized when Emacs starts up (Emacs 24.4+ only).
 Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil."
-"Set to nil by default because doesn't make sense in Android"
+  "Set to nil by default because doesn't make sense in Android"
   'boolean
   'spacemacs-dotspacemacs-init)
 
@@ -1000,9 +1000,9 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
                 "dotspacemacs-editing-style '%S"
                 (dotspacemacs//ido-completing-read
                  "What is your preferred editing style? "
-                 '(("The keybindings of Vim editor"
+                 '(("Vim: The keybindings of Vim editor"
                     vim)
-                   ("The default keybindings of Emacs"
+                   ("Emacs: The default keybindings of Emacs"
                     emacs)))))
              ("dotspacemacs-distribution 'spacemacs"
               ,(format
