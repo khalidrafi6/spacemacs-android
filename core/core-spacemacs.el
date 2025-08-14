@@ -189,7 +189,6 @@ of directories to file basenames."
   (hidden-mode-line-mode)
   ;; Enable GUI elements (menu bar, toolbar, modifier bar etc.) for Android support.
   (spacemacs//toggle-gui-elements 1)
-  (tool-bar-position 'bottom)
   ;; Setup vertical ido mode for the setup wizard.
   (spacemacs//setup-ido-vertical-mode)
   ;; Set preferred coding system to UTF-8 to avoid prompts.
