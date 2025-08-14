@@ -211,7 +211,7 @@ will be applied to scale the banner."
   '(choice (const auto) (const nil) number)
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-startup-buffer-show-version t
+(spacemacs|defc dotspacemacs-startup-buffer-show-version nil
   "If non-nil, show Spacemacs and Emacs version at the top right of the
 Spacemacs buffer."
   'boolean
@@ -360,7 +360,7 @@ pressing `<leader> m`. Set it to `nil` to disable it."
 ;;   "If non nil, distinguish C-m and return in the GUI version of
 ;; emacs.")
 
-(spacemacs|defc dotspacemacs-default-font '("Source Code Pro"
+(spacemacs|defc dotspacemacs-default-font '("JetBrains Mono"
                                             :size 10.0
                                             :weight normal
                                             :width normal)
@@ -452,7 +452,7 @@ key sequence. Setting this variable is equivalent to setting
   'number
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-which-key-position 'bottom
+(spacemacs|defc dotspacemacs-which-key-position 'right
   "Which-key frame position. Possible values are `right', `bottom' and
 `right-then-bottom'. right-then-bottom tries to display the frame to the
 right; if there is insufficient space it displays it at the bottom.
@@ -481,9 +481,10 @@ window."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-maximize-window-keep-side-windows t
+(spacemacs|defc dotspacemacs-maximize-window-keep-side-windows nil
   "Whether side windows (such as those created by treemacs or neotree)
-are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m)."
+are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
+Default is nil for mobile screen size"
   'boolean
   'spacemacs-dotspacemacs-init)
 
@@ -497,7 +498,7 @@ are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m)."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-loading-progress-bar t
+(spacemacs|defc dotspacemacs-loading-progress-bar nil
   "If non nil a progress bar is displayed when spacemacs is loading. This
 may increase the boot time on some systems and emacs builds, set it to nil
 to boost the loading time."
@@ -515,9 +516,10 @@ to disable fullscreen animations on macOS."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-maximized-at-startup t
+(spacemacs|defc dotspacemacs-maximized-at-startup nil
   "If non nil the frame is maximized when Emacs starts up (Emacs 24.4+ only).
 Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil."
+"Set to nil by default because doesn't make sense in Android"
   'boolean
   'spacemacs-dotspacemacs-init)
 
@@ -557,8 +559,8 @@ can be toggled through `toggle-background-transparency'."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-mode-line-unicode-symbols t
-  "If non nil unicode symbols are displayed in the mode-line (eg. for lighters).
+(spacemacs|defc dotspacemacs-mode-line-unicode-symbols nil
+  "If non nil, unicode symbols are displayed in the mode-line (eg. for lighters).
 If you use Emacs as a daemon and wants unicode characters only in GUI set
 the value to quoted `display-graphic-p'. (default t)"
   '(choice boolean (const display-graphic-p))
@@ -572,9 +574,10 @@ screen."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-scroll-bar-while-scrolling t
+(spacemacs|defc dotspacemacs-scroll-bar-while-scrolling nil
   "Show the scroll bar while scrolling. The auto hide time can be configured by
-setting this variable to a number."
+setting this variable to a number. Default is nil because there is no scroll bar
+in Emacs on Android"
   '(choice boolean number)
   'spacemacs-dotspacemacs-init)
 
@@ -600,13 +603,15 @@ restricts line-number to the specified list of major-mode."
            (repeat sexp))
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-enable-server nil
-  "If non-nil, start an Emacs server if one is not already running."
+(spacemacs|defc dotspacemacs-enable-server t
+  "If non-nil, start an Emacs server if one is not already running.
+Enabled by default because the server is needed to open files with Emacs on Android."
   'boolean
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-persistent-server nil
-  "If non nil advises quit functions to keep server open when quitting."
+(spacemacs|defc dotspacemacs-persistent-server t
+  "If non nil advises quit functions to keep server open when quitting.
+Enabled by default because the server is needed to open files with Emacs on Android."
   'boolean
   'spacemacs-dotspacemacs-init)
 
