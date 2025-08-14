@@ -101,7 +101,7 @@ in emacs 27."
   'integer
   'spacemacs-dotspacemacs-init)
 
-(spacemacs|defc dotspacemacs-elpa-timeout 5
+(spacemacs|defc dotspacemacs-elpa-timeout 20
   "Maximum allowed time in seconds to contact an ELPA repository."
   'integer
   'spacemacs-dotspacemacs-init)
