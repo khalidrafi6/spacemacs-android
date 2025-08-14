@@ -1000,9 +1000,9 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
                 "dotspacemacs-editing-style '%S"
                 (dotspacemacs//ido-completing-read
                  "What is your preferred editing style? "
-                 '(("Among the stars aboard the Evil flagship (vim)"
+                 '(("The keybindings of Vim editor"
                     vim)
-                   ("On the planet Emacs in the Holy control tower (emacs)"
+                   ("The default keybindings of Emacs"
                     emacs)))))
              ("dotspacemacs-distribution 'spacemacs"
               ,(format
