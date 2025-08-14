@@ -187,8 +187,9 @@ of directories to file basenames."
   (setq ad-redefinition-action 'accept)
   ;; Hide mode line for smoother startup visuals.
   (hidden-mode-line-mode)
-  ;; Disable GUI elements (toolbars, scrollbars, etc.) for a cleaner look.
-  (spacemacs//toggle-gui-elements 0)
+  ;; Enable GUI elements (menu bar, toolbar, modifier bar etc.) for Android support.
+  (spacemacs//toggle-gui-elements 1)
+  (tool-bar-position 'bottom)
   ;; Setup vertical ido mode for the setup wizard.
   (spacemacs//setup-ido-vertical-mode)
   ;; Set preferred coding system to UTF-8 to avoid prompts.
