@@ -325,8 +325,13 @@
           (call-interactively 'sp-backward-delete-char)
         (apply f args))))
 
-  ;; Define history commands for comint
+  ;; Settings specific for vim style
   (when (eq dotspacemacs-editing-style 'vim)
+
+    ;; Disable text conversion for evil to work on Android
+    (setq overriding-text-conversion-style nil)
+
+    ;; Define history commands for comint
     (evil-define-key 'insert comint-mode-map
       (kbd "C-k") 'comint-previous-input
       (kbd "C-j") 'comint-next-input))
