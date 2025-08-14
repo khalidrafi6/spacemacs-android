@@ -30,11 +30,8 @@ ON-OFF is 0 or 1, then turn gui elements OFF or ON respectively."
     (scroll-bar-mode (or on-off (not scroll-bar-mode))))
   (when  (fboundp 'tool-bar-mode)
     (tool-bar-mode (or on-off (not tool-bar-mode))))
-  (when  (fboundp 'modifier-bar-mode)
-    (modifier-bar-mode (or on-off (not modifier-bar-mode))))
-  (unless (memq (window-system) '(mac ns))
-    (when (fboundp 'menu-bar-mode)
-      (menu-bar-mode (or on-off (not menu-bar-mode)))))
+  (when (fboundp 'menu-bar-mode)
+    (menu-bar-mode (or on-off (not menu-bar-mode))))
   ;; tooltips in echo-aera
   (when (fboundp 'tooltip-mode)
     (tooltip-mode (or on-off (not tooltip-mode)))))

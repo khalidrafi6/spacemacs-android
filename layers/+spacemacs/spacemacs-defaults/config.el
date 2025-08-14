@@ -173,6 +173,9 @@ or `nil' to only save and not visit the file."
 ;; UI
 ;; ---------------------------------------------------------------------------
 
+(tool-bar-mode)
+(modifier-bar-mode)
+(setq tool-bar-position 'bottom)
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
 ;; Show column number in mode line
