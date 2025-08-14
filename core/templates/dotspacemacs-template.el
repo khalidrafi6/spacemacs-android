@@ -90,21 +90,21 @@ It should only modify the values of Spacemacs settings."
   ;; spacemacs settings.
   (setq-default
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   ;; (default 5)
-   dotspacemacs-elpa-timeout 5
+   ;; Increased for mobile networks which can be slow (default 5)
+   dotspacemacs-elpa-timeout 20
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
    ;; performance issues due to garbage collection operations.
-   ;; (default '(100000000 0.1))
-   dotspacemacs-gc-cons '(100000000 0.1)
+   ;; Increased for better performance on Android (default '(100000000 0.1))
+   dotspacemacs-gc-cons '(134217728 0.3)
 
    ;; Set `read-process-output-max' when startup finishes.
    ;; This defines how much data is read from a foreign process.
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
-   ;; (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 1024 1024)
+   ;; Optimized for Android (default (* 1024 1024))
+   dotspacemacs-read-process-output-max (* 2 1024 1024)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -184,7 +184,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-show-icons nil
 
    ;; Default major mode for a new empty buffer. Possible values are mode
-   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+   ;; names such as `text-mode'; and `nil` to use Fundamental mode.
    ;; (default `text-mode')
    dotspacemacs-new-empty-buffer-major-mode 'text-mode
 
@@ -193,6 +193,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, *scratch* buffer will be persistent. Things you write down in
    ;; *scratch* buffer will be saved and restored automatically.
+   ;; Set to nil for Android to save memory (default nil)
    dotspacemacs-scratch-buffer-persistent nil
 
    ;; If non-nil, `kill-buffer' on *scratch* buffer
@@ -230,7 +231,7 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("JetBrains Mono"
                                :size 10.0
                                :weight normal
                                :width normal)
@@ -292,7 +293,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
-   ;; file stored in the cache directory and `nil' to disable auto-saving.
+   ;; file stored in the cache directory and `nil` to disable auto-saving.
    ;; (default 'cache)
    dotspacemacs-auto-save-file-location 'cache
 
@@ -327,24 +328,26 @@ It should only modify the values of Spacemacs settings."
 
    ;; Whether side windows (such as those created by treemacs or neotree)
    ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
-   ;; (default t)
-   dotspacemacs-maximize-window-keep-side-windows t
+   ;; Optimized for Android's smaller screens (default t)
+   dotspacemacs-maximize-window-keep-side-windows nil
 
    ;; If nil, no load-hints enabled. If t, enable the `load-hints' which will
    ;; put the most likely path on the top of `load-path' to reduce walking
    ;; through the whole `load-path'. It's an experimental feature to speedup
    ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
-   dotspacemacs-enable-load-hints nil
+   ;; Enable for better Android performance
+   dotspacemacs-enable-load-hints t
 
    ;; If t, enable the `package-quickstart' feature to avoid full package
    ;; loading, otherwise no `package-quickstart' attemption (default nil).
-   ;; Refer the FAQ.org "package-quickstart" section for details.
-   dotspacemacs-enable-package-quickstart nil
+   ;; Enable for better Android performance
+   dotspacemacs-enable-package-quickstart t
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar t
+   ;; Disabled for Android for faster loading
+   dotspacemacs-loading-progress-bar nil
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
@@ -356,8 +359,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default t) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   ;; Disabled for Android (default t)
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -388,7 +391,8 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil unicode symbols are displayed in the mode line.
    ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
    ;; the value to quoted `display-graphic-p'. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   ;; Disabled for Android since Unicode can cause rendering issues
+   dotspacemacs-mode-line-unicode-symbols nil
 
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
@@ -397,7 +401,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   ;; Disabled for Android as it's unnecessary
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -415,7 +420,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       pdf-view-mode
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
-   ;; When used in a plist, `visual' takes precedence over `relative'.
+   ;; When used in a plist, `visual' takes precedence over `relative`.
    ;; (default nil)
    dotspacemacs-line-numbers nil
 
@@ -434,28 +439,28 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
-   ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
+   ;; This can be temporary disabled by pressing `C-q' before `)`. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
-   ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
+   ;; `current', `all' or `nil`. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
-   ;; (default nil)
-   dotspacemacs-enable-server nil
+   ;; Enable for Android to open files from other apps (default nil)
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
-   ;; like \"~/.emacs.d/server\". It has no effect if
+   ;; like "~/.emacs.d/server". It has no effect if
    ;; `dotspacemacs-enable-server' is nil.
    ;; (default nil)
    dotspacemacs-server-socket-dir nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
-   ;; (default nil)
-   dotspacemacs-persistent-server nil
+   ;; Enable for Android to keep server running (default nil)
+   dotspacemacs-persistent-server t
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
@@ -558,6 +563,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  ;; Android-specific optimizations
+  (setq auto-window-vscroll nil)  ;; Improves performance
+  (setq redisplay-dont-pause t)   ;; Better visual response
   )
 
 (defun dotspacemacs/user-config ()
@@ -566,6 +574,25 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; Android-specific performance optimizations
+  (setq history-length 100)
+  (setq jit-lock-defer-time 0.05)
+  (setq jit-lock-stealth-time 1)
+  (setq jit-lock-stealth-nice 0.5)
+  (setq jit-lock-stealth-load 200)
+  
+  ;; Reduce font-lock for better performance
+  (setq font-lock-maximum-decoration 2)
+  
+  ;; Make scrolling smoother on Android
+  (setq fast-but-imprecise-scrolling t)
+  (setq scroll-conservatively 101)
+  (setq scroll-margin 0)
+  (setq scroll-preserve-screen-position t)
+  
+  ;; Touch screen scrolling improvements
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil)
   )
 
 
