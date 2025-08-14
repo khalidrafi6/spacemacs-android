@@ -31,7 +31,7 @@ ON-OFF is 0 or 1, then turn gui elements OFF or ON respectively."
   (when  (fboundp 'tool-bar-mode)
     (tool-bar-mode (or on-off (not tool-bar-mode))))
   (when  (fboundp 'modifier-bar-mode)
-    (tool-bar-mode (or on-off (not modifier-bar-mode))))
+    (modifier-bar-mode (or on-off (not modifier-bar-mode))))
   (unless (memq (window-system) '(mac ns))
     (when (fboundp 'menu-bar-mode)
       (menu-bar-mode (or on-off (not menu-bar-mode)))))
