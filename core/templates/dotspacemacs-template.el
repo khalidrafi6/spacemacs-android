@@ -42,10 +42,11 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      emacs-lisp
      ;; git
-     helm
+     ;; helm
+     ivy
      ;; lsp
      ;; markdown
-     multiple-cursors
+     ;; multiple-cursors
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -53,7 +54,8 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     treemacs)
+     ;; treemacs
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -96,15 +98,13 @@ It should only modify the values of Spacemacs settings."
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
    ;; performance issues due to garbage collection operations.
-   ;; Increased for better performance on Android (default '(100000000 0.1))
-   dotspacemacs-gc-cons '(134217728 0.3)
+   dotspacemacs-gc-cons '(100000000 0.1)
 
    ;; Set `read-process-output-max' when startup finishes.
    ;; This defines how much data is read from a foreign process.
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
-   ;; Optimized for Android (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 2 1024 1024)
+   dotspacemacs-read-process-output-max (* 1024 1024)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -138,8 +138,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil show the version string in the Spacemacs buffer. It will
    ;; appear as (spacemacs version)@(emacs version)
-   ;; (default t)
-   dotspacemacs-startup-buffer-show-version t
+   dotspacemacs-startup-buffer-show-version nil
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -336,7 +335,7 @@ It should only modify the values of Spacemacs settings."
    ;; through the whole `load-path'. It's an experimental feature to speedup
    ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
    ;; Enable for better Android performance
-   dotspacemacs-enable-load-hints t
+   dotspacemacs-enable-load-hints nil
 
    ;; If t, enable the `package-quickstart' feature to avoid full package
    ;; loading, otherwise no `package-quickstart' attemption (default nil).
@@ -563,9 +562,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  ;; Android-specific optimizations
-  (setq auto-window-vscroll nil)  ;; Improves performance
-  (setq redisplay-dont-pause t)   ;; Better visual response
   )
 
 (defun dotspacemacs/user-config ()
@@ -574,25 +570,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; Android-specific performance optimizations
-  (setq history-length 100)
-  (setq jit-lock-defer-time 0.05)
-  (setq jit-lock-stealth-time 1)
-  (setq jit-lock-stealth-nice 0.5)
-  (setq jit-lock-stealth-load 200)
-  
-  ;; Reduce font-lock for better performance
-  (setq font-lock-maximum-decoration 2)
-  
-  ;; Make scrolling smoother on Android
-  (setq fast-but-imprecise-scrolling t)
-  (setq scroll-conservatively 101)
-  (setq scroll-margin 0)
-  (setq scroll-preserve-screen-position t)
-  
-  ;; Touch screen scrolling improvements
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-  (setq mouse-wheel-progressive-speed nil)
   )
 
 
