@@ -1010,10 +1010,10 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
               ,(format
                 "dotspacemacs-distribution '%S"
                 (dotspacemacs//ido-completing-read
-                 "What distribution of spacemacs would you like to start with? "
-                 `(("The standard distribution, recommended (spacemacs)"
+                 "Choose a Spacemacs distribution "
+                 `(("Standard and recommended (spacemacs)"
                     spacemacs)
-                   (,(concat "A minimalist distribution that you can build on "
+                   (,(concat "Minimal and DIY "
                              "(spacemacs-base)")
                     spacemacs-base)))))))))
     (with-current-buffer (find-file-noselect dotspacemacs-template-file)
