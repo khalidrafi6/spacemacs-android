@@ -114,6 +114,11 @@ It runs `tabulated-list-revert-hook', then calls `tabulated-list-print'."
 ;; Edit
 ;; ---------------------------------------------------------------------------
 
+;; Disable text conversion for vim and hybrid editing styles to fix text being inserted in buffer always
+
+(when (or (eq dotspacemacs-editing-style 'vim)
+          (eq dotspacemacs-editing-style 'hybrid))
+  (setq overriding-text-conversion-style nil))
 ;; bump of the undo limits to avoid issues with premature
 ;; Emacs GC which truncates the undo history very aggressively
 (setq-default
@@ -173,6 +178,7 @@ or `nil' to only save and not visit the file."
 ;; UI
 ;; ---------------------------------------------------------------------------
 
+;; Enable GUI elements for better navigation on Android
 (menu-bar-mode 1)
 (tooltip-mode 1)
 (tool-bar-mode 1)
