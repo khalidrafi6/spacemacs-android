@@ -33,6 +33,12 @@
 ;; Earlier Emacs versions do not load the early init file and do not initialize
 ;; the package manager before loading the init file, so this file is neither
 ;; needed nor loaded on those versions.
+
+;; Add Termux binaries to PATH
+(setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
+                       (getenv "PATH")))
+(push "/data/data/com.termux/files/usr/bin" exec-path)
+
 (setq package-enable-at-startup nil)
 
 (load (concat (file-name-directory load-file-name)
