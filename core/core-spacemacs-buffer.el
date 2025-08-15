@@ -122,13 +122,13 @@ It's cleared when the idle timer runs.")
       (define-key map (kbd "8") 'spacemacs-buffer/jump-to-number-startup-list-line)
       (define-key map (kbd "9") 'spacemacs-buffer/jump-to-number-startup-list-line))
 
-    (define-key map [down-mouse-1] 'spacemacs-buffer//mouse-1)
-    (define-key map [mouse-1] 'ignore) ;; left button, avoid multiple clicks
-    (define-key map [mouse-2] 'ignore) ;; mid button
-    (define-key map [mouse-3] 'ignore) ;; right button
-    (define-key map [drag-mouse-1] 'ignore)
-    (define-key map [drag-mouse-2] 'ignore)
-    (define-key map [drag-mouse-3] 'ignore)
+    ;; (define-key map [down-mouse-1] 'spacemacs-buffer//mouse-1)
+    ;; (define-key map [mouse-1] 'ignore) ;; left button, avoid multiple clicks
+    ;; (define-key map [mouse-2] 'ignore) ;; mid button
+    ;; (define-key map [mouse-3] 'ignore) ;; right button
+    ;; (define-key map [drag-mouse-1] 'ignore)
+    ;; (define-key map [drag-mouse-2] 'ignore)
+    ;; (define-key map [drag-mouse-3] 'ignore)
     (define-key map (kbd "RET") 'spacemacs-buffer/return)
 
     (define-key map [tab] 'widget-forward)
@@ -155,7 +155,7 @@ It's cleared when the idle timer runs.")
     (progn
       (evil-set-initial-state 'spacemacs-buffer-mode 'motion)
       (evil-make-overriding-map spacemacs-buffer-mode-map 'motion)))
-  (suppress-keymap spacemacs-buffer-mode-map t)
+  ;; (suppress-keymap spacemacs-buffer-mode-map t)
   (set-keymap-parent spacemacs-buffer-mode-map nil)
   (setq-local buffer-read-only t
               truncate-lines t))
