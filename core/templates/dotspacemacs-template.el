@@ -340,7 +340,7 @@ It should only modify the values of Spacemacs settings."
    ;; If t, enable the `package-quickstart' feature to avoid full package
    ;; loading, otherwise no `package-quickstart' attemption (default nil).
    ;; Enable for better Android performance
-   dotspacemacs-enable-package-quickstart t
+   dotspacemacs-enable-package-quickstart nil
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
