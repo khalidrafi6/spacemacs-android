@@ -1001,9 +1001,9 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
                 (dotspacemacs//ido-completing-read
                  "Choose an editing style "
                  '(
-                   ("The default keybindings of Emacs"
+                   ("Emacs"
                     emacs)
-                   ("The keybindings of the Vim editor"
+                   ("Vim"
                     vim)
                    ))))
              ("dotspacemacs-distribution 'spacemacs"
