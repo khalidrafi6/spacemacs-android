@@ -184,6 +184,8 @@ or `nil' to only save and not visit the file."
 (tool-bar-mode 1)
 (modifier-bar-mode 1)
 (setopt tool-bar-position 'bottom)
+;; Enable word wrap
+(global-visual-line-mode 1)
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
 ;; Show column number in mode line
