@@ -129,6 +129,7 @@ It's cleared when the idle timer runs.")
     ;; (define-key map [drag-mouse-1] 'ignore)
     ;; (define-key map [drag-mouse-2] 'ignore)
     ;; (define-key map [drag-mouse-3] 'ignore)
+    (define-key map [touchscreen-begin] 'spacemacs-buffer/return)
     (define-key map (kbd "RET") 'spacemacs-buffer/return)
 
     (define-key map [tab] 'widget-forward)
@@ -289,7 +290,7 @@ Returns height in units of line height with a minimum of 1."
   "Display an image banner.
 BANNER: the path to an ascii banner file."
   (when (file-exists-p banner)
-    (let* ((title spacemacs-buffer-logo-title)
+    (let* ((title emacs-version)
            (spec (create-image banner))
            ;; we must use the scaled size for determining the correct
            ;; left-margin size
@@ -934,26 +935,29 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
   (insert " ")
   (widget-create 'url-link
                  :tag (propertize "Homepage" 'face 'font-lock-keyword-face)
-                 :help-echo "Open the Spacemacs GitHub page in your browser."
+                 :help-echo "Open the Emacs homepage in your browser."
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 "https://spacemacs.org")
+                 "https://www.gnu.org/software/emacs/")
   (insert " ")
-  (widget-create 'url-link
+  (widget-create 'push-button
                  :tag (propertize "Documentation" 'face 'font-lock-keyword-face)
-                 :help-echo "Open the Spacemacs documentation in your browser."
+                 :help-echo "Read the Spacemacs documentation."
+                 :action (lambda (&rest ignore)
+                           (find-file (concat spacemacs-start-directory "doc/DOCUMENTATION.org"))
+                           (read-only-mode))
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 "https://spacemacs.org/doc/DOCUMENTATION.html")
+                 (propertize "Documentation" 'face 'font-lock-keyword-face))
   (insert " ")
-  (widget-create 'url-link
-                 :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
-                 :help-echo
-                 "Ask questions and chat with fellow users in our chat room."
-                 :mouse-face 'highlight
-                 :follow-link "\C-m"
-                 "https://gitter.im/syl20bnr/spacemacs")
-  (insert " ")
+  ;; (widget-create 'url-link
+  ;;                :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
+  ;;                :help-echo
+  ;;                "Ask questions and chat with fellow users in our chat room."
+  ;;                :mouse-face 'highlight
+  ;;                :follow-link "\C-m"
+  ;;                "https://gitter.im/syl20bnr/spacemacs")
+  ;; (insert " ")
   (widget-create 'push-button
                  :help-echo "GPLv3 copying conditions."
                  :action (lambda (&rest ignore)
@@ -988,15 +992,15 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                              'face 'font-lock-keyword-face))
   (spacemacs-buffer//center-line)
   (insert "\n")
-  (widget-create 'push-button
-                 :tag (propertize "Release Notes"
-                                  'face 'font-lock-preprocessor-face)
-                 :help-echo "Hide or show the Changelog"
-                 :action (lambda (&rest ignore)
-                           (spacemacs-buffer/toggle-note 'release-note))
-                 :mouse-face 'highlight
-                 :follow-link "\C-m")
-  (insert " ")
+  ;; (widget-create 'push-button
+  ;;                :tag (propertize "Release Notes"
+  ;;                                 'face 'font-lock-preprocessor-face)
+  ;;                :help-echo "Hide or show the Changelog"
+  ;;                :action (lambda (&rest ignore)
+  ;;                          (spacemacs-buffer/toggle-note 'release-note))
+  ;;                :mouse-face 'highlight
+  ;;                :follow-link "\C-m")
+  ;; (insert " ")
   (widget-create 'url-link
                  :tag (propertize "Search in Spacemacs"
                                   'face 'font-lock-function-name-face)
