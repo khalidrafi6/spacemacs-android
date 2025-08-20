@@ -196,6 +196,8 @@ or `nil' to only save and not visit the file."
 (spaceline-toggle-buffer-size-off)
 (spaceline-toggle-buffer-encoding-off)
 (spaceline-toggle-buffer-encoding-abbrev-off)
+(spaceline-toggle-buffer-position-off)
+(spaceline-toggle-hud-off)
 ;; Show column number in mode line
 (setq column-number-mode t)
 
