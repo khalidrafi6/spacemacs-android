@@ -936,14 +936,14 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
   "Create and insert the interactive buttons under Spacemacs banner."
   (goto-char (point-max))
   ;; (spacemacs-buffer||add-shortcut "m" "[?]" t)
-  (widget-create 'url-link
-                 :tag (propertize "?" 'face 'font-lock-doc-face)
-                 :help-echo "Open the quickhelp."
-                 :action (lambda (&rest ignore)
-                           (spacemacs-buffer/toggle-note 'quickhelp))
-                 :mouse-face 'highlight
-                 :follow-link "\C-m")
-  (insert " ")
+  ;; (widget-create 'url-link
+  ;;                :tag (propertize "?" 'face 'font-lock-doc-face)
+  ;;                :help-echo "Open the quickhelp."
+  ;;                :action (lambda (&rest ignore)
+  ;;                          (spacemacs-buffer/toggle-note 'quickhelp))
+  ;;                :mouse-face 'highlight
+  ;;                :follow-link "\C-m")
+  ;; (insert " ")
   (widget-create 'url-link
                  :tag (propertize "Homepage" 'face 'font-lock-keyword-face)
                  :help-echo "Open the Emacs homepage in your browser."
