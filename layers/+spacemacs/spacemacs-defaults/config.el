@@ -191,13 +191,6 @@ or `nil' to only save and not visit the file."
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
 
-;; Mode line settings
-;; Disable useless extra info for better mode line view on Android
-(spaceline-toggle-buffer-size-off)
-(spaceline-toggle-buffer-encoding-off)
-(spaceline-toggle-buffer-encoding-abbrev-off)
-(spaceline-toggle-buffer-position-off)
-(spaceline-toggle-hud-off)
 ;; Show column number in mode line
 (setq column-number-mode t)
 
