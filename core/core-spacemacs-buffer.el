@@ -934,7 +934,7 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
 (defun spacemacs-buffer//insert-buttons ()
   "Create and insert the interactive buttons under Spacemacs banner."
   (goto-char (point-max))
-  (spacemacs-buffer||add-shortcut "m" "[?]" t)
+  ;; (spacemacs-buffer||add-shortcut "m" "[?]" t)
   (widget-create 'url-link
                  :tag (propertize "?" 'face 'font-lock-doc-face)
                  :help-echo "Open the quickhelp."
@@ -951,14 +951,12 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                  "https://www.gnu.org/software/emacs/")
   (insert " ")
   (widget-create 'push-button
-                 :tag (propertize "Documentation" 'face 'font-lock-keyword-face)
-                 :help-echo "Read the Spacemacs documentation."
+                 :help-echo "Read the Emacs Manual"
                  :action (lambda (&rest ignore)
-                           (find-file (concat spacemacs-start-directory "doc/DOCUMENTATION.org"))
-                           (read-only-mode))
+                           (info-emacs-manual))
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 (propertize "Documentation" 'face 'font-lock-keyword-face))
+                 (propertize "Manual" 'face 'font-lock-keyword-face))
   (insert " ")
   ;; (widget-create 'url-link
   ;;                :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
@@ -983,6 +981,27 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                                                 (line-beginning-position)
                                                 len)))
   (insert "\n")
+  (widget-create 'push-button
+                 :tag (propertize "Evil (Vim) Tutorial"
+                                  'face 'font-lock-keyword-face)
+                 :help-echo
+                 "Teach you how to use Vim basics."
+                 :action (lambda (&rest ignore)
+                           (call-interactively #'evil-tutor-start))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  (widget-insert " ")
+  (widget-create 'push-button
+                 :tag (propertize "Emacs Tutorial"
+                                  'face 'font-lock-keyword-face)
+                 :help-echo "Teach you how to use Emacs basics."
+                 :action (lambda (&rest ignore)
+                           (call-interactively #'help-with-tutorial))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  ;; center the buttons: Evil Tutorial, Emacs Tutorial, etc.
+  (spacemacs-buffer//center-line)
+  (widget-insert "\n")
   (widget-create 'push-button
                  :help-echo "Update all ELPA packages to the latest versions."
                  :action (lambda (&rest ignore)
@@ -1011,6 +1030,25 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
   ;;                :mouse-face 'highlight
   ;;                :follow-link "\C-m")
   ;; (insert " ")
+  (widget-create 'push-button
+                 :tag (propertize "Spacemacs Documentation" 'face 'font-lock-function-name-face)
+                 :help-echo "Read the Spacemacs documentation."
+                 :action (lambda (&rest ignore)
+                           (find-file (concat spacemacs-start-directory "doc/DOCUMENTATION.org"))
+                           (read-only-mode))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 (propertize "Spacemacs Documentation" 'face 'font-lock-function-name-face))
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Source Code"
+                                  'face 'font-lock-function-name-face)
+                 :help-echo "Visit the Github repository of Spacemacs for Android"
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 "https://github.com/khalidrafi6/spacemacs-android")
+  (spacemacs-buffer//center-line)
+  (insert "\n")
   (widget-create 'url-link
                  :tag (propertize "Search in Spacemacs"
                                   'face 'font-lock-function-name-face)
