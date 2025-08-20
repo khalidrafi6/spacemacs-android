@@ -156,8 +156,8 @@ It's cleared when the idle timer runs.")
     (progn
       (evil-set-initial-state 'spacemacs-buffer-mode 'motion)
       (evil-make-overriding-map spacemacs-buffer-mode-map 'motion)))
-  ;; (suppress-keymap spacemacs-buffer-mode-map t)
-  (set-keymap-parent spacemacs-buffer-mode-map nil)
+  (suppress-keymap spacemacs-buffer-mode-map t)
+  (set-keymap-parent spacemacs-buffer-mode-map widget-keymap)
   (setq-local buffer-read-only t
               truncate-lines t))
 
