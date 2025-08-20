@@ -25,6 +25,8 @@
 ;; Navigation
 ;; ---------------------------------------------------------------------------
 
+;; Always display on-screen keyboard for better navigation with Spacemacs on Android
+(setq touch-screen-display-keyboard 1)
 ;; Auto refresh
 (global-auto-revert-mode 1)
 ;; Also auto refresh dired, but be quiet about it
@@ -184,10 +186,16 @@ or `nil' to only save and not visit the file."
 (tool-bar-mode 1)
 (modifier-bar-mode 1)
 (setopt tool-bar-position 'bottom)
-;; Enable word wrap
+;; Enable visual line-based editing with word wrap
 (global-visual-line-mode 1)
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
+
+;; Mode line settings
+;; Disable useless extra info for better mode line view on Android
+(spaceline-toggle-buffer-size-off)
+(spaceline-toggle-buffer-encoding-off)
+(spaceline-toggle-buffer-encoding-abbrev-off)
 ;; Show column number in mode line
 (setq column-number-mode t)
 
