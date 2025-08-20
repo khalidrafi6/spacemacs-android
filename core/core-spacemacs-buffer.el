@@ -290,7 +290,8 @@ Returns height in units of line height with a minimum of 1."
   "Display an image banner.
 BANNER: the path to an ascii banner file."
   (when (file-exists-p banner)
-    (let* ((title emacs-version)
+    (let* (
+           ;; (title emacs-version)
            (spec (create-image banner))
            ;; we must use the scaled size for determining the correct
            ;; left-margin size
@@ -304,15 +305,16 @@ BANNER: the path to an ascii banner file."
                     (factor factor)))
            (size (cons (* scale (car unscaled-size)) (* scale (cdr unscaled-size))))
            (width (car size))
-           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width) 2))))
+           (left-margin (+ 3 (max 0 (floor (- spacemacs-buffer--window-width width) 2)) )))
       ;; we scale the image by simply setting the scale property in the image-spec
       (plist-put (cdr spec) :scale scale)
       (insert (make-string left-margin ?\s))
       (insert-image spec)
       (insert "\n\n")
-      (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--window-width
-                                               (+ (length title) 1)) 2))) ?\s))
-      (insert (format "%s\n\n" title)))))
+      ;; (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--window-width
+      ;;                                          (+ (length title) 1)) 2))) ?\s))
+      ;; (insert (format "%s\n\n" title))
+      )))
 
 (defun spacemacs-buffer//insert-version ()
   "Insert the current version of Spacemacs and Emacs.
