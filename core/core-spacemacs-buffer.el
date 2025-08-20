@@ -129,7 +129,7 @@ It's cleared when the idle timer runs.")
     ;; (define-key map [drag-mouse-1] 'ignore)
     ;; (define-key map [drag-mouse-2] 'ignore)
     ;; (define-key map [drag-mouse-3] 'ignore)
-    (define-key map [touchscreen-begin] 'spacemacs-buffer/return)
+    ;; (define-key map [touchscreen-begin] 'spacemacs-buffer/return)
     (define-key map (kbd "RET") 'spacemacs-buffer/return)
 
     (define-key map [tab] 'widget-forward)
