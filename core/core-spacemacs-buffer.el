@@ -425,7 +425,7 @@ Right justified, based on the Spacemacs buffers window width."
   ;;          (gplv3-size (when gplv3 (car (image-size gplv3))))
   ;;          (buffer-read-only nil))
   ;;     (goto-char (point-max))
-  ;;     (spacemacs-buffer/insert-page-break)
+  (spacemacs-buffer/insert-page-break)
   ;;     (insert "\n")
   ;;     (when badge
   ;;       (insert-image badge)
