@@ -34,10 +34,17 @@
 ;; the package manager before loading the init file, so this file is neither
 ;; needed nor loaded on those versions.
 
-;; Add Termux binaries to PATH
-;; (setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
-;;                        (getenv "PATH")))
-;; (push "/data/data/com.termux/files/usr/bin" exec-path)
+(setenv "PREFIX" "/data/data/com.termux/files/usr")
+
+(defun conc-prefix (&rest path-parts)
+  "Return path constructed from PREFIX environment variable and PATH-PARTS."
+  (apply #'concat (getenv "PREFIX") path-parts))
+
+(defvar termux-bin (conc-prefix "/bin"))
+
+(setenv "PATH" (format "%s:%s" termux-bin (getenv "PATH")))
+
+(push termux-bin exec-path)
 
 (setq package-enable-at-startup nil)
 
