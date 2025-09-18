@@ -35,9 +35,9 @@
 ;; needed nor loaded on those versions.
 
 ;; Add Termux binaries to PATH
-(setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
-                       (getenv "PATH")))
-(push "/data/data/com.termux/files/usr/bin" exec-path)
+;; (setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
+;;                        (getenv "PATH")))
+;; (push "/data/data/com.termux/files/usr/bin" exec-path)
 
 (setq package-enable-at-startup nil)
 
