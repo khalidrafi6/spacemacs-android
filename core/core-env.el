@@ -109,6 +109,8 @@ current contents of the file will be overwritten."
           "\n"
           "# Environment variables:\n"
           "# ----------------------\n"))
+        (insert "PREFIX=/data/data/com.termux/files/usr")
+        (insert "PATH=/data/data/com.termux/files/usr/bin")
         (let ((process-environment initial-environment)
               (env-point (point)))
           (dolist (shell-command-switch shell-command-switches)
