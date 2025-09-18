@@ -11,7 +11,7 @@ Spacemacs-Android is currently in development and testing.  Please help the deve
 
 ---
 
-## 🌟 Goals
+## 🎯 Goals
 
 - **Android-Optimized**: Tweaks and configurations for better usability on touch screens and smaller displays.
 - **Curated Layers**: Enable layers and packages that work well on Android.
@@ -48,6 +48,16 @@ Spacemacs-Android is currently in development and testing.  Please help the deve
 
 ---
 
+## 💔 Known Issues
+
+- Sometimes Emacs refuses to launch.
+
+  - Workaround: Go to **App Info** > **Additional settings in the app**. Now select **Restart Emacs with --debug-init**.
+  
+- Restaring Emacs doesn't work.
+
+---
+
 ## 💡 Contributing & Feedback
 
 We welcome feedback, bug reports, and suggestions!  
@@ -55,9 +65,9 @@ If you find issues or want to propose improvements, please open an [issue](https
 
 ---
 
-## 🙏 Credits
+## ❣️ Credits
 
-- Based on [Spacemacs](https://github.com/syl20bnr/spacemacs)
+- Thanks to [Spacemacs](https://github.com/syl20bnr/spacemacs) for a nice configuration
 - Thanks to the Emacs & Termux communities
 
 ---
