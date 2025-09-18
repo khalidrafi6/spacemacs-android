@@ -1,7 +1,7 @@
 # Spacemacs-Android: An Unofficial Fork of Spacemacs Optimized for Android
 
 Welcome to **Spacemacs-Android** – a customized fork of [Spacemacs](https://github.com/syl20bnr/spacemacs) designed specifically for Android devices!  
-This project aims to bring the features of Spacemacs to Android to provide you with a familiar mobile development environment as your desktop.
+This project aims to bring the features of Spacemacs to Android to provide you with a familiar development environment on your Android like your desktop.
 
 ---
 
@@ -18,6 +18,23 @@ Spacemacs-Android is currently in development and testing.  Please help the deve
 - **Mobile Keybindings**: Adjust keymaps for devices without physical keyboards.
 - **Performance Improvements**: Disable heavy desktop features for better speed on mobile hardware.
 - **Easy Setup**: Clone and use instantly, with sensible defaults for Android.
+
+---
+
+## 📋 Prerequisites
+
+Before installing Spacemacs-Android, ensure you have the following:
+
+- **Emacs for Android**: You need Emacs installed on your Android device with Termux support*  
+- **Git**: Required to clone the repository and update Spacemacs-Android.
+- **Tar**: Needed to install and update Emacs packages. Usually available in Termux.
+- **ripgrep (`rg`)** *(Optional but strongly recommended)*: Many search features in Spacemacs-Android will be much faster and more powerful if you install [ripgrep](https://github.com/BurntSushi/ripgrep).  
+  - Install in Termux with:  
+    ```sh
+    pkg install ripgrep
+    ```
+- *(Optional)* **Font**: For best support, install the default font [JetBrains Mono](http://jetbrains.com/lp/mono/) in `~/fonts/` in your Emacs home directory.
+- *(Recommended)* **External Keyboard**: For a better navigation and editing experience.
 
 ---
 
