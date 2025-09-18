@@ -38,6 +38,7 @@
     "INVOCATION_ID"
     "JOURNAL_STREAM"
     "MANAGERPID"
+    "PATH"
     "SESSION_MANAGER"
     "SSH_AGENT_PID"
     "SSH_AUTH_SOCK"
@@ -111,8 +112,6 @@ current contents of the file will be overwritten."
           "# ----------------------\n"))
         (let ((process-environment initial-environment)
               (env-point (point)))
-          (insert "PREFIX=/data/data/com.termux/files/usr\n")
-          (insert "PATH=/data/data/com.termux/files/usr/bin\n")
           (dolist (shell-command-switch shell-command-switches)
             (call-process-shell-command
              (concat executable " > " (shell-quote-argument tmpfile)))
