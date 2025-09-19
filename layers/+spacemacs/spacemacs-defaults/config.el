@@ -309,3 +309,6 @@ variables (see `savehist-mode' and `savehist-additional-variables')."
 
 ;; Suppress the *Warnings* buffer when native compilation shows warnings.
 (setq native-comp-async-report-warnings-errors 'silent)
+
+;; Set Bash from Termux as the default shell for Android
+(setq-default shell-file-name (conc-prefix "/bin/bash"))
