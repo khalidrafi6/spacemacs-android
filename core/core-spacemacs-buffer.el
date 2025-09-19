@@ -754,7 +754,9 @@ ADDITIONAL-WIDGETS: a function for inserting a widget under the frame."
     (spacemacs-buffer//notes-insert-note (concat spacemacs-release-notes-directory
                                                  spacemacs-buffer-version-info
                                                  ".txt")
-                                         (format "Important Notes (Release %s.x)"
+                                         ;; (format "Important Notes (Release %s.x)"
+                                         ;; Temporarily remove Release number
+                                         (format "Important Notes"
                                                  spacemacs-buffer-version-info)
                                          "Update your dotfile (SPC f e D) and\
  packages after every update"
