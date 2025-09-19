@@ -51,8 +51,7 @@
     (setq-default fancy-battery-show-percentage t)))
 
 (defun spacemacs-modeline/init-spaceline ()
-  (use-package spaceline
-    :commands (spaceline-compile spaceline-define-segment)
+  (use-package spaceline-config
     :init
     (add-hook 'spacemacs-post-user-config-hook
               'spacemacs/spaceline-config-startup-hook)
@@ -146,7 +145,7 @@
 
 (defun spacemacs-modeline/pre-init-spaceline-all-the-icons ()
   (when (eq 'all-the-icons (spacemacs/get-mode-line-theme-name))
-    (spacemacs|use-package-add-hook spaceline
+    (spacemacs|use-package-add-hook spaceline-config
       :pre-config
       (progn
         (require 'spaceline-all-the-icons)
