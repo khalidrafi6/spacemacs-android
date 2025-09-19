@@ -210,11 +210,13 @@
   - [[#themes-megapack][Themes Megapack]]
   - [[#theming][Theming]]
 - [[#tools][Tools]]
+  - [[#aider-layer][Aider Layer]]
   - [[#ansible][Ansible]]
   - [[#apache][Apache]]
   - [[#bm][Bm]]
   - [[#cfengine][CFEngine]]
   - [[#chrome][Chrome]]
+  - [[#claude-code-layer][Claude Code Layer]]
   - [[#cmake][CMake]]
   - [[#command-log][Command-log]]
   - [[#dap][DAP]]
@@ -271,7 +273,6 @@
   - [[#layer-for-reddit][Layer for reddit]]
   - [[#lobsters][Lobsters]]
   - [[#openai][OpenAI]]
-  - [[#pocket][Pocket]]
   - [[#search-engine][Search Engine]]
   - [[#streamlink][Streamlink]]
   - [[#twitch][Twitch]]
@@ -2236,7 +2237,7 @@ Features:
 - Code Navigation
 - Documentation Lookup using [[https://github.com/proofit404/anaconda-mode][anaconda-mode]] and [[https://github.com/tsgates/pylookup][pylookup]]
 - Test Runners using [[https://github.com/ionrock/pytest-el][pytest]] or [[https://github.com/syl20bnr/nose.el][nose.el]]
-- Virtual Environment using [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] and [[https://github.com/yyuu/pyenv][pyenv]] as well as [[https://github.com/pypa/pipenv][pipenv]] and [[https://github.com/galaunay/poetry.el][poetry]]
+- Virtual Environment using [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] and [[https://github.com/yyuu/pyenv][pyenv]] as well as [[https://github.com/pypa/pipenv][pipenv]], [[https://github.com/galaunay/poetry.el][poetry]], and [[https://github.com/astral-sh/uv][UV]]
 - semantic mode is enabled
 - PEP8 compliant formatting via [[https://github.com/google/yapf][YAPF]], [[https://github.com/ambv/black][black]], or [[https://github.com/astral-sh/ruff][ruff]]
 - PEP8 checks with [[https://pypi.python.org/pypi/flake8][flake8]] or [[https://pypi.python.org/pypi/pylint/1.6.4][pylint]]
@@ -2748,6 +2749,21 @@ Features:
 - Includes three additional layer variables for tweaking headings.
 
 * Tools
+** Aider Layer
+[[file:+tools/aider/README.org][+tools/aider/README.org]]
+
+This layer adds support for [[https://github.com/Aider-AI/aider][Aider]], an AI pair programming tool that helps you
+edit code in your local git repository. Aider works with various language models
+(GPT-4, Claude, etc.) to make changes to your codebase.
+
+Features:
+- AI-powered code editing and generation
+- Multiple AI modes: code, ask, architect, and help
+- Seamless integration with git repositories
+- File management for AI context
+- Unit test generation and debugging
+- Auto-commit with generated messages
+
 ** Ansible
 [[file:+tools/ansible/README.org][+tools/ansible/README.org]]
 
@@ -2805,6 +2821,21 @@ Features:
 - Edit text boxes with Emacs using [[https://github.com/stsquad/emacs_chrome][edit-server]]
 - Write markdown in Emacs and realtime show in chrome using [[https://github.com/mola-T/flymd][flymd]]
 - gmail message mode uses standard markdown key bindings
+
+** Claude Code Layer
+[[file:+tools/claude-code/README.org][+tools/claude-code/README.org]]
+
+This layer adds support for [[https://github.com/manzaltu/claude-code-ide.el][Claude Code IDE]], an Emacs package that provides
+seamless integration with Claude Code CLI for AI-assisted coding.
+
+Features:
+- AI-powered code editing and generation using Claude
+- Terminal-based interaction with Claude Code CLI
+- Multi-project session management
+- Deep Emacs integration with transient menus
+- Resume and continue conversations
+- Send code regions and symbols for analysis
+- Project-aware context handling
 
 ** CMake
 [[file:+tools/cmake/README.org][+tools/cmake/README.org]]
@@ -3287,6 +3318,10 @@ Features:
 
 =xclipboard= integration layer.
 
+When running Emacs in a terminal, it will attempt to use OSC52 for copying and pasting
+automatically. This feature is intended for terminals that do not support OSC52, or for
+users who want advanced clipboard functionality in the terminal.
+
 Features:
 - adds copy support to the X-clipboard from the terminal.
 - adds paste support to the X-clipboard from the terminal.
@@ -3463,19 +3498,6 @@ Features:
 - Improve, edit, and document code
 - Chat sessions with chatgpt
 - Obtain AI generated images
-
-** Pocket
-[[file:+web-services/pocket/README.org][+web-services/pocket/README.org]]
-
-This layer adds [[https://getpocket.com/][Pocket]] support to Spacemacs via the package
-[[https://github.com/alphapapa/pocket-reader.el][pocket-reader]].
-
-Features:
-- Manage reading list: add, remove, delete, tag, view, favorite, etc.
-- Open links in Emacs or external browser
-- Sort views by date, title, domain, tags, favorite, etc.
-- Search items by keywords, tags, favorite status, unread/archived
-  status, etc.
 
 ** Search Engine
 [[file:+web-services/search-engine/README.org][+web-services/search-engine/README.org]]

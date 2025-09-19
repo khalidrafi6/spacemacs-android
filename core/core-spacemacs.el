@@ -137,7 +137,7 @@ of directories to file basenames."
         (setq filename (expand-file-name name path)))
       (list feature filename noerror)))
 
-  (advice-add #'require :filter-args #'require@LOAD-HINTS)
+  (advice-add #'require :filter-args #'require@LOAD-HINTS '((depth . -99)))
 
   ;; Advice to update load-hints after autoload generation.
   (define-advice package-generate-autoloads (:after (name pkg-dir) LOAD-HINTS)
@@ -333,8 +333,6 @@ defer call using `spacemacs-post-user-config-hook'."
      (when spacemacs--delayed-user-theme
        (spacemacs/load-theme spacemacs--delayed-user-theme
                              spacemacs--fallback-theme t))
-     ;; Display configuration layer summary.
-     (configuration-layer/display-summary)
      ;; Check for new Spacemacs version.
      (spacemacs/check-for-new-version nil spacemacs-version-check-interval)
      ;; Move cursor to link line in Spacemacs buffer.
@@ -345,6 +343,8 @@ defer call using `spacemacs-post-user-config-hook'."
      (setq read-process-output-max dotspacemacs-read-process-output-max)
      ;; Redraw Spacemacs buffer to ensure it displays correctly.
      (spacemacs-buffer//startup-hook)
+     ;; Display configuration layer summary.
+     (configuration-layer/display-summary)
      ;; Set garbage collection settings for performance.
      (setq gc-cons-threshold (car dotspacemacs-gc-cons)
            gc-cons-percentage (cadr dotspacemacs-gc-cons))))

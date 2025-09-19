@@ -20,6 +20,7 @@
   - [[#transient-state][Transient state]]
   - [[#files][Files]]
   - [[#buffers][Buffers]]
+  - [[#git-if-git-layer-is-enabled][Git (if git layer is enabled)]]
   - [[#bookmarks][Bookmarks]]
   - [[#colorsfaces][Colors/Faces]]
   - [[#c-z-and-tab-switch][C-z and Tab switch]]
@@ -193,6 +194,13 @@ In the =helm-buffers= buffer:
 |--------------+------------------------------------------|
 | ~S-<return>~ | open the selected buffer in other window |
 
+** Git (if git layer is enabled)
+
+| Key binding | Description                   |
+|-------------+-------------------------------|
+| ~SPC g /~   | open =helm-git-grep=          |
+| ~SPC g *~   | open =helm-git-grep-at-point= |
+
 ** Bookmarks
 In the =helm-bookmarks= buffer:
 
@@ -239,7 +247,7 @@ first, select the command you want to run, and press ~C-u~ before pressing
 ~<return>~. For instance: ~SPC SPC org-reload C-u RET~
 
 ** Replacing text in several files
-If you have =rg=, =ag=, =pt= or =ack= installed, replacing an occurrence of text
+If you have =rg=, =ag=, or =ack= installed, replacing an occurrence of text
 in several files can be performed via [[https://github.com/syohex/emacs-helm-ag][helm-ag]].
 
 To replace all occurrences of =foo= with =bar= in your current project:
@@ -249,9 +257,6 @@ To replace all occurrences of =foo= with =bar= in your current project:
 - Change =foo= to =bar=
 - Save the modifications and leave =helm-ag-edit= with ~C-c C-c~
 - Alternatively, discard all changes and leave =helm-ag-edit= with ~C-c C-k~
-
-*Note*: In Spacemacs, =helm-ag= despite its name works with =rg=, =pt= and =ack=
-as well (but not with =grep=).
 
 ** Resume last session
 Use ~SPC r l~ to resume the last helm session. For instance it is handy to

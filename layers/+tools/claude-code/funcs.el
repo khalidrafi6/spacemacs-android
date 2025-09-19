@@ -1,8 +1,8 @@
-;;; packages.el --- pocket Layer packages File for Spacemacs  -*- lexical-binding: nil; -*-
+;;; funcs.el --- Claude Code Layer functions File for Spacemacs  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (c) 2012-2025 Sylvain Benner & Contributors
 ;;
-;; Author: Sylvain Benner <sylvain.benner@gmail.com>
+;; Author: sunlin7 <sunlin7 AT hotmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -20,16 +20,15 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(defconst pocket-packages
-  '(pocket-reader))
 
-(defun pocket/init-pocket-reader ()
-  (use-package pocket-reader
-    :defer t
-    :init (spacemacs/set-leader-keys "awp" 'pocket-reader)
-    :config
-    (evilified-state-evilify-map pocket-reader-mode-map
-      :mode pocket-reader-mode
-      :bindings
-      "gr" 'pocket-reader-resort
-      "gR" 'pocket-reader-refresh)))
+(defun spacemacs/claude-code-explain-symbol-at-point ()
+  "Send a question about the symbol at point to Claude Code."
+  (interactive)
+  (if-let* ((symbol (thing-at-point 'symbol t)))
+      (cl-letf (((symbol-function 'read-string)
+                 (lambda (&rest args)
+                   (format "What does %s do?" symbol))))
+        (claude-code-ide-send-prompt))
+    (message "No symbol at point")))
+
+

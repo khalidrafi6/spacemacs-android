@@ -159,17 +159,6 @@ If DEFAULT-INPUTP is non nil then the current region or symbol at point
   (interactive)
   (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-files-do-ack))
 
-(defun spacemacs/helm-files-do-pt (&optional dir)
-  "Search in files with `pt'."
-  (interactive)
-  (let ((helm-ag-base-command "pt -e --nocolor --nogroup"))
-    (helm-do-ag dir)))
-
-(defun spacemacs/helm-files-do-pt-region-or-symbol ()
-  "Search in files with `pt' using a default input."
-  (interactive)
-  (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-files-do-pt))
-
 (defun spacemacs/helm-files-do-rg (&optional dir)
   "Search in files with `rg'."
   (interactive)
@@ -231,16 +220,6 @@ If DEFAULT-INPUTP is non nil then the current region or symbol at point
   (interactive)
   (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-files-do-ack default-directory))
 
-(defun spacemacs/helm-dir-do-pt ()
-  "Search in current directory with `pt'."
-  (interactive)
-  (spacemacs/helm-files-do-pt default-directory))
-
-(defun spacemacs/helm-dir-do-pt-region-or-symbol ()
-  "Search in current directory with `pt' with a default input."
-  (interactive)
-  (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-files-do-pt default-directory))
-
 (defun spacemacs/helm-dir-do-rg ()
   "Search in current directory with `rg'."
   (interactive)
@@ -292,17 +271,6 @@ If DEFAULT-INPUTP is non nil then the current region or symbol at point
   (interactive)
   (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-buffers-do-ack))
 
-(defun spacemacs/helm-buffers-do-pt (&optional _)
-  "Search in opened buffers with `pt'."
-  (interactive)
-  (let ((helm-ag-base-command "pt -e --nocolor --nogroup"))
-    (helm-do-ag-buffers)))
-
-(defun spacemacs/helm-buffers-do-pt-region-or-symbol ()
-  "Search in opened buffers with `pt' using a default input."
-  (interactive)
-  (spacemacs//helm-do-ag-region-or-symbol 'spacemacs/helm-buffers-do-pt))
-
 (defun spacemacs/helm-buffers-do-rg (&optional _)
   "Search in opened buffers with `rg'."
   (interactive)
@@ -344,7 +312,7 @@ If DEFAULT-INPUTP is non nil then the current region or symbol at point
     (spacemacs/helm-project-smart-do-search)))
 
 (defun spacemacs/helm-projectile-grep ()
-  "Replace `helm-projectile-grep' to actually use `ag', `pt' etc.."
+  "Replace `helm-projectile-grep' to actually use `ag', `rg' etc.."
   (interactive)
   (helm-exit-and-execute-action
    'spacemacs/helm-project-smart-do-search-in-dir))
@@ -380,23 +348,6 @@ If DEFAULT-INPUTP is non nil then the current region or symbol at point
     (if dir
         (spacemacs//helm-do-ag-region-or-symbol
          'spacemacs/helm-files-do-ack dir)
-      (message "error: Not in a project."))))
-
-(defun spacemacs/helm-project-do-pt ()
-  "Search in current project with `pt'."
-  (interactive)
-  (let ((dir (projectile-project-root)))
-    (if dir
-        (spacemacs/helm-files-do-pt dir)
-      (message "error: Not in a project."))))
-
-(defun spacemacs/helm-project-do-pt-region-or-symbol ()
-  "Search in current project with `pt' using a default input."
-  (interactive)
-  (let ((dir (projectile-project-root)))
-    (if dir
-        (spacemacs//helm-do-ag-region-or-symbol
-         'spacemacs/helm-files-do-pt dir)
       (message "error: Not in a project."))))
 
 (defun spacemacs/helm-project-do-rg ()
@@ -535,6 +486,16 @@ Removes the automatic guessing of the initial value based on thing at point. "
     (set-text-properties 0 (length input) nil input)
     (helm-find-files-1 input)))
 
+(defun spacemacs/helm-git-grep ()
+  "Search for a pattern in the Git repository of the current buffer."
+  (interactive)
+  (helm-grep-git-1 "" t nil ""))
+
+(defun spacemacs/helm-git-grep-at-point ()
+  "Search for the symbol at point in the Git repository of the current buffer."
+  (interactive)
+  (helm-grep-git-1 "" t))
+
  ;; Key bindings
 
 (defmacro spacemacs||set-helm-key (keys func)
@@ -636,12 +597,33 @@ to buffers)."
 
 
 ;; theme
+(defun spacemacs//helm-themes-load (theme)
+  "Disable the `custom-enabled-themes'first then load the named THEME."
+  (mapc 'disable-theme custom-enabled-themes)
+  (if (string= theme "default")
+      t
+    (load-theme (intern theme) t)))
+
+(defun spacemacs//helm-themes-candidates ()
+  "Return list of available themes with `default' on the head."
+  (cons 'default (custom-available-themes)))
 
 (defun spacemacs/helm-themes ()
-  "Remove limit on number of candidates on `helm-themes'"
+  "List the theme candidates without number limit."
   (interactive)
-  (let (helm-candidate-number-limit)
-    (helm-themes)))
+  (let* (helm-candidate-number-limit
+         (get-theme (lambda () (or (car-safe custom-enabled-themes) 'default)))
+         (orig-theme (funcall get-theme)))
+    (unwind-protect
+        (unless (helm :prompt (format "pattern (current theme: %s): " orig-theme)
+                      :preselect (format "%s$" orig-theme)
+                      :sources (helm-build-sync-source "Selection Theme"
+                                 :candidates 'spacemacs//helm-themes-candidates
+                                 :action 'spacemacs//helm-themes-load
+                                 :persistent-action 'spacemacs//helm-themes-load)
+                      :buffer "*helm-themes*")
+          (unless (eq orig-theme (funcall get-theme))
+            (spacemacs//helm-themes-load (symbol-name orig-theme)))))))
 
 ;; Buffers ---------------------------------------------------------------------
 
