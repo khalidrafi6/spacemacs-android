@@ -334,18 +334,17 @@ It should only modify the values of Spacemacs settings."
    ;; put the most likely path on the top of `load-path' to reduce walking
    ;; through the whole `load-path'. It's an experimental feature to speedup
    ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
-   ;; Enable for better Android performance
    dotspacemacs-enable-load-hints nil
 
    ;; If t, enable the `package-quickstart' feature to avoid full package
    ;; loading, otherwise no `package-quickstart' attemption (default nil).
-   ;; Enable for better Android performance
+   ;; Read FAQ.org for more information.
    dotspacemacs-enable-package-quickstart nil
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   ;; Disabled for Android for faster loading
+   ;; Disabled on Android for faster loading
    dotspacemacs-loading-progress-bar nil
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
