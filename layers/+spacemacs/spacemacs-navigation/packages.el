@@ -36,7 +36,7 @@
                                  :repo "emacsmirror/info-plus"))
         open-junk-file
         paradox
-        restart-emacs
+        ;; restart-emacs
         (smooth-scrolling :location built-in)
         symbol-overlay
         winum
@@ -120,9 +120,9 @@
 
     (with-eval-after-load 'evil
       (define-key evil-motion-state-map (kbd "*")
-        'spacemacs/enter-ahs-forward)
+                  'spacemacs/enter-ahs-forward)
       (define-key evil-motion-state-map (kbd "#")
-        'spacemacs/enter-ahs-backward))
+                  'spacemacs/enter-ahs-backward))
 
     (spacemacs/set-leader-keys
       "sh" 'spacemacs/symbol-highlight
@@ -365,22 +365,23 @@
       "L" 'paradox-menu-view-commit-list
       "o" 'paradox-menu-visit-homepage)))
 
-(defun spacemacs-navigation/init-restart-emacs ()
-  (use-package restart-emacs
-    :defer t
-    :init
-    (with-eval-after-load 'files
-      ;; unbind `restart-emacs' and declare it from package for ticket #15505
-      (fmakunbound 'restart-emacs)
-      (autoload 'restart-emacs "restart-emacs"))
+;; (defun spacemacs-navigation/init-restart-emacs ()
+;;   (use-package restart-emacs
+;;     :defer t
+;;     :init
+;;     (with-eval-after-load 'files
+;;       ;; unbind `restart-emacs' and declare it from package for ticket #15505
+;;       (fmakunbound 'restart-emacs)
+;;       (autoload 'restart-emacs "restart-emacs"))
 
-    (spacemacs/set-leader-keys
-      "qd" 'spacemacs/restart-emacs-debug-init
-      "qD" 'spacemacs/restart-stock-emacs-with-packages
-      "qr" 'spacemacs/restart-emacs-resume-layouts
-      "qR" 'spacemacs/restart-emacs
-      "qt" 'spacemacs/restart-emacs-timed-requires
-      "qT" 'spacemacs/restart-emacs-adv-timers)))
+(spacemacs/set-leader-keys
+  "qd" 'spacemacs/restart-emacs-debug-init
+  "qD" 'spacemacs/restart-stock-emacs-with-packages
+  "qr" 'spacemacs/restart-emacs-resume-layouts
+  "qR" 'spacemacs/restart-emacs
+  "qt" 'spacemacs/restart-emacs-timed-requires
+  "qT" 'spacemacs/restart-emacs-adv-timers)
+;; ))
 
 (defun spacemacs-navigation/init-smooth-scrolling ()
   (setq scroll-preserve-screen-position t
