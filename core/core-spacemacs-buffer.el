@@ -1024,24 +1024,15 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                              'face 'font-lock-keyword-face))
   (spacemacs-buffer//center-line)
   (insert "\n")
-  ;; (widget-create 'push-button
-  ;;                :tag (propertize "Release Notes"
-  ;;                                 'face 'font-lock-preprocessor-face)
-  ;;                :help-echo "Hide or show the Changelog"
-  ;;                :action (lambda (&rest ignore)
-  ;;                          (spacemacs-buffer/toggle-note 'release-note))
-  ;;                :mouse-face 'highlight
-  ;;                :follow-link "\C-m")
-  ;; (insert " ")
   (widget-create 'push-button
-                 :tag (propertize "Spacemacs Documentation" 'face 'font-lock-function-name-face)
+                 :tag (propertize "Documentation" 'face 'font-lock-function-name-face)
                  :help-echo "Read the Spacemacs documentation."
                  :action (lambda (&rest ignore)
                            (find-file (concat spacemacs-start-directory "doc/DOCUMENTATION.org"))
                            (read-only-mode))
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 (propertize "Spacemacs Documentation" 'face 'font-lock-function-name-face))
+                 (propertize "Documentation" 'face 'font-lock-function-name-face))
   (insert " ")
   (widget-create 'url-link
                  :tag (propertize "Source Code"
@@ -1052,6 +1043,16 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                  "https://github.com/khalidrafi6/spacemacs-android")
   (spacemacs-buffer//center-line)
   (insert "\n")
+  (widget-create 'push-button
+                 :tag (propertize "Release Notes"
+                                  'face 'font-lock-preprocessor-face)
+                 :help-echo "Hide or show the Changelog"
+                 :action (lambda (&rest ignore)
+                           (spacemacs-buffer/toggle-note 'release-note))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  (insert " ")
+
   (widget-create 'url-link
                  :tag (propertize "Search in Spacemacs"
                                   'face 'font-lock-function-name-face)
