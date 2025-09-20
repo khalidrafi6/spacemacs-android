@@ -404,48 +404,48 @@ Right justified, based on the Spacemacs buffers window width."
           (apply (intern (format "%s-icon-for-file" font)) (file-name-nondirectory path) (or args '(:height 0.8 :v-adjust -0.05)))))
     str))
 
-(defun spacemacs-buffer//insert-footer ()
-  "Insert the footer of the home buffer."
-  ;; (save-excursion
-  ;;   (let* ((badge-path spacemacs-badge-official-png)
-  ;;          (badge (when (and (display-graphic-p)
-  ;;                            (image-type-available-p
-  ;;                             (intern (file-name-extension badge-path))))
-  ;;                   (create-image badge-path)))
-  ;;          (badge-size (when badge (car (image-size badge))))
-  ;;          (build-by (concat "Made with "
-  ;;                            (spacemacs-buffer//font-icons-icon "heart" 'heart)
-  ;;                            " by the community"))
-  ;;          (proudly-free "Proudly free software")
-  ;;          (gplv3-path spacemacs-gplv3-official-png)
-  ;;          (gplv3 (when (and (display-graphic-p)
-  ;;                            (image-type-available-p
-  ;;                             (intern (file-name-extension gplv3-path))))
-  ;;                   (create-image gplv3-path)))
-  ;;          (gplv3-size (when gplv3 (car (image-size gplv3))))
-  ;;          (buffer-read-only nil))
-  ;;     (goto-char (point-max))
-  ;; (spacemacs-buffer/insert-page-break)
-  ;;     (insert "\n")
-  ;;     (when badge
-  ;;       (insert-image badge)
-  ;;       (spacemacs-buffer//center-line badge-size)
-  ;;       (insert "\n\n"))
-  ;;     (insert build-by)
-  ;;     (spacemacs-buffer//center-line (length build-by))
-  ;;     (insert "\n\n")
-  ;;     (widget-create 'url-link
-  ;;                    :tag proudly-free
-  ;;                    :help-echo "What is free software?"
-  ;;                    :mouse-face 'highlight
-  ;;                    :follow-link "\C-m"
-  ;;                    "https://www.gnu.org/philosophy/free-sw.en.html")
-  ;;     (spacemacs-buffer//center-line (+ 2 (length proudly-free)))
-  ;;     (when gplv3
-  ;;       (insert "\n\n")
-  ;;       (insert-image gplv3)
-  ;;       (spacemacs-buffer//center-line gplv3-size)
-  (insert "\n"))
+;; (defun spacemacs-buffer//insert-footer ()
+;;   "Insert the footer of the home buffer."
+;;   (save-excursion
+;;     (let* ((badge-path spacemacs-badge-official-png)
+;;            (badge (when (and (display-graphic-p)
+;;                              (image-type-available-p
+;;                               (intern (file-name-extension badge-path))))
+;;                     (create-image badge-path)))
+;;            (badge-size (when badge (car (image-size badge))))
+;;            (build-by (concat "Made with "
+;;                              (spacemacs-buffer//font-icons-icon "heart" 'heart)
+;;                              " by the community"))
+;;            (proudly-free "Proudly free software")
+;;            (gplv3-path spacemacs-gplv3-official-png)
+;;            (gplv3 (when (and (display-graphic-p)
+;;                              (image-type-available-p
+;;                               (intern (file-name-extension gplv3-path))))
+;;                     (create-image gplv3-path)))
+;;            (gplv3-size (when gplv3 (car (image-size gplv3))))
+;;            (buffer-read-only nil))
+;;       (goto-char (point-max))
+;;   (spacemacs-buffer/insert-page-break)
+;;       (insert "\n")
+;;       (when badge
+;;         (insert-image badge)
+;;         (spacemacs-buffer//center-line badge-size)
+;;         (insert "\n\n"))
+;;       (insert build-by)
+;;       (spacemacs-buffer//center-line (length build-by))
+;;       (insert "\n\n")
+;;       (widget-create 'url-link
+;;                      :tag proudly-free
+;;                      :help-echo "What is free software?"
+;;                      :mouse-face 'highlight
+;;                      :follow-link "\C-m"
+;;                      "https://www.gnu.org/philosophy/free-sw.en.html")
+;;       (spacemacs-buffer//center-line (+ 2 (length proudly-free)))
+;;       (when gplv3
+;;         (insert "\n\n")
+;;         (insert-image gplv3)
+;;         (spacemacs-buffer//center-line gplv3-size)
+;;   (insert "\n"))
 ;; )))
 
 (defmacro spacemacs-buffer||notes-adapt-caption-to-width (caption
@@ -1627,7 +1627,7 @@ can be adjusted with the variable:
   (with-current-buffer (get-buffer spacemacs-buffer-name)
     (when dotspacemacs-startup-lists
       (spacemacs-buffer/insert-startup-lists))
-    (spacemacs-buffer//insert-footer)
+    ;; (spacemacs-buffer//insert-footer)
     (if configuration-layer-error-count
         (progn
           (spacemacs-buffer-mode)
@@ -1677,7 +1677,7 @@ If a prefix argument is given, switch to it in an other, possibly new window."
             (spacemacs-buffer//notes-redisplay-current-note)
             (when dotspacemacs-startup-lists
               (spacemacs-buffer/insert-startup-lists))
-            (spacemacs-buffer//insert-footer)
+            ;; (spacemacs-buffer//insert-footer)
             (configuration-layer/display-summary)
             (spacemacs-buffer/set-mode-line spacemacs--default-mode-line)
             (force-mode-line-update)
