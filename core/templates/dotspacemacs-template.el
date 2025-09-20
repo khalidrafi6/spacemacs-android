@@ -457,8 +457,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-server-socket-dir nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
-   ;; Enable for Android to keep server running (default nil)
-   dotspacemacs-persistent-server t
+   ;; Don't enable it. It breaks restarting on Android (default nil)
+   dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `ack' and `grep'.
