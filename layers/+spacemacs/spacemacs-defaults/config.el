@@ -186,8 +186,10 @@ or `nil' to only save and not visit the file."
 (tool-bar-mode 1)
 (modifier-bar-mode 1)
 (setopt tool-bar-position 'bottom)
-;; Enable visual line-based editing with word wrap
+;; Enable visual line-based editing with word wrap since Android has smaller screens
 (global-visual-line-mode 1)
+;; Also enable visual wrap prefix mode globally for wrapped lines to look better
+(global-visual-wrap-prefix-mode 1)
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
 
