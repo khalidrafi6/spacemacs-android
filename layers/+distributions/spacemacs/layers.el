@@ -27,7 +27,7 @@
 ;; This is a special case only for distribution layers.
 (configuration-layer/declare-layers
  '(
-   helm
+   ivy
    treemacs
    spacemacs-base
    spacemacs-completion
