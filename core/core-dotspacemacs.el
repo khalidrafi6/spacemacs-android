@@ -610,8 +610,7 @@ Enabled by default because the server is needed to open files with Emacs on Andr
   'spacemacs-dotspacemacs-init)
 
 (spacemacs|defc dotspacemacs-persistent-server nil
-  "If non nil advises quit functions to keep server open when quitting.
-Enabled by default because the server is needed to open files with Emacs on Android."
+  "If non nil advises quit functions to keep server open when quitting."
   'boolean
   'spacemacs-dotspacemacs-init)
 
