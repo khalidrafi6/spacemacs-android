@@ -32,8 +32,8 @@
         golden-ratio
         (grep :location built-in)
         (info :location built-in)
-        (info+ :location (recipe :fetcher github
-                                 :repo "emacsmirror/info-plus"))
+        ;; (info+ :location (recipe :fetcher github
+        ;;                          :repo "emacsmirror/info-plus"))
         open-junk-file
         paradox
         ;; restart-emacs
@@ -328,12 +328,12 @@
 (defun spacemacs-navigation/init-info ()
   (spacemacs/set-leader-keys "hj" 'info-display-manual))
 
-(defun spacemacs-navigation/init-info+ ()
-  (use-package info+
-    :defer t
-    :init
-    (setq Info-fontify-angle-bracketed-flag nil)
-    (with-eval-after-load "info" (require 'info+))))
+;; (defun spacemacs-navigation/init-info+ ()
+;;   (use-package info+
+;;     :defer t
+;;     :init
+;;     (setq Info-fontify-angle-bracketed-flag nil)
+;;     (with-eval-after-load "info" (require 'info+))))
 
 (defun spacemacs-navigation/init-open-junk-file ()
   (use-package open-junk-file
