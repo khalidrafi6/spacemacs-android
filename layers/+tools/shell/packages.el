@@ -368,6 +368,8 @@
     (spacemacs/register-repl 'vterm 'vterm)
     :config
     (setq vterm-shell shell-default-term-shell)
+    (message "vterm-shell set by layer: %S" vterm-shell)
+
     (define-key vterm-mode-map (kbd "M-n") 'vterm-send-down)
     (define-key vterm-mode-map (kbd "M-p") 'vterm-send-up)
     (define-key vterm-mode-map (kbd "M-y") 'vterm-yank-pop)

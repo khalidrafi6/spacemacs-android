@@ -40,7 +40,7 @@
    spacemacs-modeline
    spacemacs-navigation
    spacemacs-org
-   spacemacs-project
+   ;; spacemacs-project
    spacemacs-purpose
    spacemacs-visual
    ))
