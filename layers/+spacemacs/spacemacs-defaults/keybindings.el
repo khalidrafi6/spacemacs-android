@@ -687,6 +687,42 @@ respond to this toggle."
   "w+"  'spacemacs/window-layout-toggle
   "w_"  'spacemacs/maximize-horizontally
   "w|"  'spacemacs/maximize-vertically)
+;; project -----------------------------------------------------------------------
+(spacemacs/set-leader-keys
+  ;; File path
+  ;; "fyC" 'spacemacs/projectile-copy-file-path-with-line-column
+  ;; "fyD" 'spacemacs/projectile-copy-directory-path
+  ;; "fyL" 'spacemacs/projectile-copy-file-path-with-line
+  ;; "fyY" 'spacemacs/projectile-copy-file-path
+  ;; ;; Project
+  "p!" 'project-shell-command
+  "p&" 'project-async-shell-command
+  "pb" 'project-switch-to-buffer
+  "pc" 'project-compile
+  "pd" 'project-find-dir
+  "pD" 'project-dired
+  "pe" 'project-eshell
+  "pf" 'project-find-file
+  "pF" 'project-or-external-find-file
+  "pg" 'project-find-regexp
+  "pG" 'project-or-external-find-regexp
+  "pk" 'project-kill-buffers
+  "po" 'project-any-command
+  "pp" 'project-switch-project
+  "pr" 'project-query-replace-regexp
+  "ps" 'project-shell
+  "pv" 'project-vc-dir
+  "px" 'project-execute-extended-command)
+
+(spacemacs|spacebind
+ "Navigate projects"
+ :global
+ (
+  ("p" "Projects"
+
+   ("C-b" project-list-buffers "List all project buffers...")
+   )))
+
 ;; text -----------------------------------------------------------------------
 (defalias 'count-region 'count-words-region)
 
