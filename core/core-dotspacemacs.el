@@ -998,7 +998,7 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
               ,(format
                 "dotspacemacs-editing-style '%S"
                 (dotspacemacs//ido-completing-read
-                 "Choose an editing style "
+                 "Choose an editing style: "
                  '(
                    ("Emacs"
                     emacs)
@@ -1009,7 +1009,7 @@ If ARG is non nil then ask questions to the user before installing the dotfile."
               ,(format
                 "dotspacemacs-distribution '%S"
                 (dotspacemacs//ido-completing-read
-                 "Choose a Spacemacs distribution "
+                 "Choose a Spacemacs distribution: "
                  `(("Standard and recommended (spacemacs)"
                     spacemacs)
                    (,(concat "Minimal and DIY "
