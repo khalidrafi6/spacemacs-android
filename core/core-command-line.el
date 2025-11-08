@@ -40,7 +40,9 @@ Otherwise, load the user's Spacemacs config as normal.")
 (defun spacemacs//parse-command-line (args)
   "Handle Spacemacs specific command line arguments.
 The reason why we don't use the Emacs hooks for processing user defined
-arguments is that we want to process these arguments as soon as possible."
+arguments is that we want to process these arguments as soon as possible.
+
+Performance note: Length is cached to avoid O(n) recalculation on each iteration."
   (let ((i 0) 
         (args-length (length args))
         new-args)

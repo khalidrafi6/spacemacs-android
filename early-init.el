@@ -42,6 +42,7 @@
 
 (defvar termux-bin (conc-prefix "/bin"))
 
+;; Performance: Cache getenv result to avoid redundant system call
 (let ((current-path (getenv "PATH")))
   (setenv "PATH" (format "%s:%s" termux-bin current-path)))
 

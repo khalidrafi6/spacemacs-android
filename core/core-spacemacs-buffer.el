@@ -163,7 +163,10 @@ It's cleared when the idle timer runs.")
 
 (defun spacemacs-buffer//insert-ascii-banner-centered (file)
   "Insert the ascii banner contain in file and center it in the window.
-FILE: the path to the file containing the banner."
+FILE: the path to the file containing the banner.
+
+Performance note: Two-pass algorithm calculates banner width first,
+then applies margin in a single traversal to minimize buffer operations."
   (insert
    (with-temp-buffer
      (insert-file-contents file)
