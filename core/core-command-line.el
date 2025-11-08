@@ -41,11 +41,13 @@ Otherwise, load the user's Spacemacs config as normal.")
   "Handle Spacemacs specific command line arguments.
 The reason why we don't use the Emacs hooks for processing user defined
 arguments is that we want to process these arguments as soon as possible."
-  (let ((i 0) new-args)
-    (while (< i (length args))
+  (let ((i 0) 
+        (args-length (length args))
+        new-args)
+    (while (< i args-length)
       (let ((arg (nth i args))
             (next-arg-digit
-             (when (< (1+ i) (length args))
+             (when (< (1+ i) args-length)
                (string-to-number (nth (1+ i) args)))))
         (when (or (null next-arg-digit) (= 0 next-arg-digit))
           (setq next-arg-digit nil))

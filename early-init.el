@@ -42,7 +42,8 @@
 
 (defvar termux-bin (conc-prefix "/bin"))
 
-(setenv "PATH" (format "%s:%s" termux-bin (getenv "PATH")))
+(let ((current-path (getenv "PATH")))
+  (setenv "PATH" (format "%s:%s" termux-bin current-path)))
 
 (push termux-bin exec-path)
 
