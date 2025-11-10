@@ -27,7 +27,7 @@
 ;; This is a special case only for distribution layers.
 (configuration-layer/declare-layers
  '(
-   ivy
+   compleseus
    treemacs
    spacemacs-base
    spacemacs-completion
