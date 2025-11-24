@@ -190,8 +190,6 @@ or `nil' to only save and not visit the file."
 (global-visual-line-mode 1)
 ;; Also enable visual wrap prefix mode globally for wrapped lines to look better
 (global-visual-wrap-prefix-mode 1)
-
-
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
 
