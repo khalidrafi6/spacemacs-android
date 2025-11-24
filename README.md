@@ -115,16 +115,6 @@ You should also update Emacs packages after an update. Use the `[Update Packages
 
 ---
 
-## 💔 Known Issues
-
-- Sometimes Emacs might refuse to launch.
-
-  - Workaround: Go to **App Info** > **Additional settings in the app**. Now select **Restart Emacs with --debug-init**.
-  
-- Restaring Emacs doesn't work.
-
----
-
 ## 💡 Contributing & Feedback
 
 I welcome feedback, bug reports, and suggestions!  
