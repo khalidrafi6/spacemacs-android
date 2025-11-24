@@ -27,7 +27,7 @@
 ;; This is a special case only for distribution layers.
 (configuration-layer/declare-layers
  '(
-   helm
+   compleseus
    treemacs
    spacemacs-base
    spacemacs-completion
@@ -40,7 +40,7 @@
    spacemacs-modeline
    spacemacs-navigation
    spacemacs-org
-   spacemacs-project
+   ;; spacemacs-project
    spacemacs-purpose
    spacemacs-visual
    ))

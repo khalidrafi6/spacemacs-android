@@ -33,6 +33,19 @@
 ;; Earlier Emacs versions do not load the early init file and do not initialize
 ;; the package manager before loading the init file, so this file is neither
 ;; needed nor loaded on those versions.
+
+(setenv "PREFIX" "/data/data/com.termux/files/usr")
+
+(defun conc-prefix (&rest path-parts)
+  "Return path constructed from PREFIX environment variable and PATH-PARTS."
+  (apply #'concat (getenv "PREFIX") path-parts))
+
+(defvar termux-bin (conc-prefix "/bin"))
+
+(setenv "PATH" (format "%s:%s" termux-bin (getenv "PATH")))
+
+(push termux-bin exec-path)
+
 (setq package-enable-at-startup nil)
 
 (load (concat (file-name-directory load-file-name)

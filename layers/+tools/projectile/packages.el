@@ -20,10 +20,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(defconst spacemacs-project-packages
+(defconst projectile-packages
   '(projectile))
 
-(defun spacemacs-project/init-projectile ()
+(defun projectile/init-projectile ()
   (use-package projectile
     :commands (projectile-ack
                projectile-ag

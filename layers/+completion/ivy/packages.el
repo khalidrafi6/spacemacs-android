@@ -278,7 +278,13 @@
     (ido-mode -1)
 
     ;; allow to select prompt in some ivy functions
-    (setq ivy-use-selectable-prompt t)))
+    (setq ivy-use-selectable-prompt t)
+
+    ;; Disable `truncate-lines' setting in ivy minibuffers. This is for adapting to Android's smaller screens.
+    (setq ivy-truncate-lines nil)
+
+    ;; Remove all initial inputs from Ivy
+    (setq ivy-initial-inputs-alist nil)))
 
 (defun ivy/init-ivy-avy ()
   (use-package ivy-avy

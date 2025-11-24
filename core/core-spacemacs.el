@@ -187,7 +187,7 @@ of directories to file basenames."
   (setq ad-redefinition-action 'accept)
   ;; Hide mode line for smoother startup visuals.
   (hidden-mode-line-mode)
-  ;; Disable GUI elements (toolbars, scrollbars, etc.) for a cleaner look.
+  ;; Disable GUI elements by default
   (spacemacs//toggle-gui-elements 0)
   ;; Setup vertical ido mode for the setup wizard.
   (spacemacs//setup-ido-vertical-mode)

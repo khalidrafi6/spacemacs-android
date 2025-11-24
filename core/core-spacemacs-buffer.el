@@ -123,13 +123,14 @@ It's cleared when the idle timer runs.")
       (define-key map (kbd "8") 'spacemacs-buffer/jump-to-number-startup-list-line)
       (define-key map (kbd "9") 'spacemacs-buffer/jump-to-number-startup-list-line))
 
-    (define-key map [down-mouse-1] 'spacemacs-buffer//mouse-1)
-    (define-key map [mouse-1] 'ignore) ;; left button, avoid multiple clicks
-    (define-key map [mouse-2] 'ignore) ;; mid button
-    (define-key map [mouse-3] 'ignore) ;; right button
-    (define-key map [drag-mouse-1] 'ignore)
-    (define-key map [drag-mouse-2] 'ignore)
-    (define-key map [drag-mouse-3] 'ignore)
+    ;; (define-key map [down-mouse-1] 'spacemacs-buffer//mouse-1)
+    ;; (define-key map [mouse-1] 'ignore) ;; left button, avoid multiple clicks
+    ;; (define-key map [mouse-2] 'ignore) ;; mid button
+    ;; (define-key map [mouse-3] 'ignore) ;; right button
+    ;; (define-key map [drag-mouse-1] 'ignore)
+    ;; (define-key map [drag-mouse-2] 'ignore)
+    ;; (define-key map [drag-mouse-3] 'ignore)
+    ;; (define-key map [touchscreen-begin] 'spacemacs-buffer/return)
     (define-key map (kbd "RET") 'spacemacs-buffer/return)
 
     (define-key map [tab] 'widget-forward)
@@ -157,7 +158,7 @@ It's cleared when the idle timer runs.")
       (evil-set-initial-state 'spacemacs-buffer-mode 'motion)
       (evil-make-overriding-map spacemacs-buffer-mode-map 'motion)))
   (suppress-keymap spacemacs-buffer-mode-map t)
-  (set-keymap-parent spacemacs-buffer-mode-map nil)
+  (set-keymap-parent spacemacs-buffer-mode-map widget-keymap)
   (setq-local buffer-read-only t
               truncate-lines t))
 
@@ -290,7 +291,8 @@ Returns height in units of line height with a minimum of 1."
   "Display an image banner.
 BANNER: the path to an ascii banner file."
   (when (file-exists-p banner)
-    (let* ((title spacemacs-buffer-logo-title)
+    (let* (
+           ;; (title emacs-version)
            (spec (create-image banner))
            ;; we must use the scaled size for determining the correct
            ;; left-margin size
@@ -304,15 +306,16 @@ BANNER: the path to an ascii banner file."
                     (factor factor)))
            (size (cons (* scale (car unscaled-size)) (* scale (cdr unscaled-size))))
            (width (car size))
-           (left-margin (max 0 (floor (- spacemacs-buffer--window-width width) 2))))
+           (left-margin (+ 3 (max 0 (floor (- spacemacs-buffer--window-width width) 2)) )))
       ;; we scale the image by simply setting the scale property in the image-spec
       (plist-put (cdr spec) :scale scale)
       (insert (make-string left-margin ?\s))
       (insert-image spec)
       (insert "\n\n")
-      (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--window-width
-                                               (+ (length title) 1)) 2))) ?\s))
-      (insert (format "%s\n\n" title)))))
+      ;; (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--window-width
+      ;;                                          (+ (length title) 1)) 2))) ?\s))
+      ;; (insert (format "%s\n\n" title))
+      )))
 
 (defun spacemacs-buffer//insert-version ()
   "Insert the current version of Spacemacs and Emacs.
@@ -402,48 +405,49 @@ Right justified, based on the Spacemacs buffers window width."
           (apply (intern (format "%s-icon-for-file" font)) (file-name-nondirectory path) (or args '(:height 0.8 :v-adjust -0.05)))))
     str))
 
-(defun spacemacs-buffer//insert-footer ()
-  "Insert the footer of the home buffer."
-  (save-excursion
-    (let* ((badge-path spacemacs-badge-official-png)
-           (badge (when (and (display-graphic-p)
-                             (image-type-available-p
-                              (intern (file-name-extension badge-path))))
-                    (create-image badge-path)))
-           (badge-size (when badge (car (image-size badge))))
-           (build-by (concat "Made with "
-                             (spacemacs-buffer//font-icons-icon "heart" 'heart)
-                             " by the community"))
-           (proudly-free "Proudly free software")
-           (gplv3-path spacemacs-gplv3-official-png)
-           (gplv3 (when (and (display-graphic-p)
-                             (image-type-available-p
-                              (intern (file-name-extension gplv3-path))))
-                    (create-image gplv3-path)))
-           (gplv3-size (when gplv3 (car (image-size gplv3))))
-           (buffer-read-only nil))
-      (goto-char (point-max))
-      (spacemacs-buffer/insert-page-break)
-      (insert "\n")
-      (when badge
-        (insert-image badge)
-        (spacemacs-buffer//center-line badge-size)
-        (insert "\n\n"))
-      (insert build-by)
-      (spacemacs-buffer//center-line (length build-by))
-      (insert "\n\n")
-      (widget-create 'url-link
-                     :tag proudly-free
-                     :help-echo "What is free software?"
-                     :mouse-face 'highlight
-                     :follow-link "\C-m"
-                     "https://www.gnu.org/philosophy/free-sw.en.html")
-      (spacemacs-buffer//center-line (+ 2 (length proudly-free)))
-      (when gplv3
-        (insert "\n\n")
-        (insert-image gplv3)
-        (spacemacs-buffer//center-line gplv3-size)
-        (insert "\n")))))
+;; (defun spacemacs-buffer//insert-footer ()
+;;   "Insert the footer of the home buffer."
+;;   (save-excursion
+;;     (let* ((badge-path spacemacs-badge-official-png)
+;;            (badge (when (and (display-graphic-p)
+;;                              (image-type-available-p
+;;                               (intern (file-name-extension badge-path))))
+;;                     (create-image badge-path)))
+;;            (badge-size (when badge (car (image-size badge))))
+;;            (build-by (concat "Made with "
+;;                              (spacemacs-buffer//font-icons-icon "heart" 'heart)
+;;                              " by the community"))
+;;            (proudly-free "Proudly free software")
+;;            (gplv3-path spacemacs-gplv3-official-png)
+;;            (gplv3 (when (and (display-graphic-p)
+;;                              (image-type-available-p
+;;                               (intern (file-name-extension gplv3-path))))
+;;                     (create-image gplv3-path)))
+;;            (gplv3-size (when gplv3 (car (image-size gplv3))))
+;;            (buffer-read-only nil))
+;;       (goto-char (point-max))
+;;   (spacemacs-buffer/insert-page-break)
+;;       (insert "\n")
+;;       (when badge
+;;         (insert-image badge)
+;;         (spacemacs-buffer//center-line badge-size)
+;;         (insert "\n\n"))
+;;       (insert build-by)
+;;       (spacemacs-buffer//center-line (length build-by))
+;;       (insert "\n\n")
+;;       (widget-create 'url-link
+;;                      :tag proudly-free
+;;                      :help-echo "What is free software?"
+;;                      :mouse-face 'highlight
+;;                      :follow-link "\C-m"
+;;                      "https://www.gnu.org/philosophy/free-sw.en.html")
+;;       (spacemacs-buffer//center-line (+ 2 (length proudly-free)))
+;;       (when gplv3
+;;         (insert "\n\n")
+;;         (insert-image gplv3)
+;;         (spacemacs-buffer//center-line gplv3-size)
+;;   (insert "\n"))
+;; )))
 
 (defmacro spacemacs-buffer||notes-adapt-caption-to-width (caption
                                                           caption-length
@@ -751,7 +755,9 @@ ADDITIONAL-WIDGETS: a function for inserting a widget under the frame."
     (spacemacs-buffer//notes-insert-note (concat spacemacs-release-notes-directory
                                                  spacemacs-buffer-version-info
                                                  ".txt")
-                                         (format "Important Notes (Release %s.x)"
+                                         ;; (format "Important Notes (Release %s.x)"
+                                         ;; Temporarily remove Release number
+                                         (format "Important Notes"
                                                  spacemacs-buffer-version-info)
                                          "Update your dotfile (SPC f e D) and\
  packages after every update"
@@ -932,7 +938,7 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
 (defun spacemacs-buffer//insert-buttons ()
   "Create and insert the interactive buttons under Spacemacs banner."
   (goto-char (point-max))
-  (spacemacs-buffer||add-shortcut "m" "[?]" t)
+  ;; (spacemacs-buffer||add-shortcut "m" "[?]" t)
   (widget-create 'url-link
                  :tag (propertize "?" 'face 'font-lock-doc-face)
                  :help-echo "Open the quickhelp."
@@ -943,26 +949,27 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
   (insert " ")
   (widget-create 'url-link
                  :tag (propertize "Homepage" 'face 'font-lock-keyword-face)
-                 :help-echo "Open the Spacemacs GitHub page in your browser."
+                 :help-echo "Open the Emacs homepage in your browser."
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 "https://spacemacs.org")
+                 "https://www.gnu.org/software/emacs/")
   (insert " ")
-  (widget-create 'url-link
-                 :tag (propertize "Documentation" 'face 'font-lock-keyword-face)
-                 :help-echo "Open the Spacemacs documentation in your browser."
+  (widget-create 'push-button
+                 :help-echo "Read the Emacs Manual"
+                 :action (lambda (&rest ignore)
+                           (info-emacs-manual))
                  :mouse-face 'highlight
                  :follow-link "\C-m"
-                 "https://spacemacs.org/doc/DOCUMENTATION.html")
+                 (propertize "Manual" 'face 'font-lock-keyword-face))
   (insert " ")
-  (widget-create 'url-link
-                 :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
-                 :help-echo
-                 "Ask questions and chat with fellow users in our chat room."
-                 :mouse-face 'highlight
-                 :follow-link "\C-m"
-                 "https://gitter.im/syl20bnr/spacemacs")
-  (insert " ")
+  ;; (widget-create 'url-link
+  ;;                :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
+  ;;                :help-echo
+  ;;                "Ask questions and chat with fellow users in our chat room."
+  ;;                :mouse-face 'highlight
+  ;;                :follow-link "\C-m"
+  ;;                "https://gitter.im/syl20bnr/spacemacs")
+  ;; (insert " ")
   (widget-create 'push-button
                  :help-echo "GPLv3 copying conditions."
                  :action (lambda (&rest ignore)
@@ -978,6 +985,27 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                                                 (line-beginning-position)
                                                 len)))
   (insert "\n")
+  (widget-create 'push-button
+                 :tag (propertize "Evil (Vim) Tutorial"
+                                  'face 'font-lock-keyword-face)
+                 :help-echo
+                 "Teach you how to use Vim basics."
+                 :action (lambda (&rest ignore)
+                           (call-interactively #'evil-tutor-start))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  (widget-insert " ")
+  (widget-create 'push-button
+                 :tag (propertize "Emacs Tutorial"
+                                  'face 'font-lock-keyword-face)
+                 :help-echo "Teach you how to use Emacs basics."
+                 :action (lambda (&rest ignore)
+                           (call-interactively #'help-with-tutorial))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  ;; center the buttons: Evil Tutorial, Emacs Tutorial, etc.
+  (spacemacs-buffer//center-line)
+  (widget-insert "\n")
   (widget-create 'push-button
                  :help-echo "Update all ELPA packages to the latest versions."
                  :action (lambda (&rest ignore)
@@ -998,6 +1026,25 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
   (spacemacs-buffer//center-line)
   (insert "\n")
   (widget-create 'push-button
+                 :tag (propertize "Documentation" 'face 'font-lock-function-name-face)
+                 :help-echo "Read the Spacemacs documentation."
+                 :action (lambda (&rest ignore)
+                           (find-file (concat spacemacs-start-directory "doc/DOCUMENTATION.org"))
+                           (read-only-mode))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 (propertize "Documentation" 'face 'font-lock-function-name-face))
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Source Code"
+                                  'face 'font-lock-function-name-face)
+                 :help-echo "Visit the Github repository of Spacemacs for Android"
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 "https://github.com/khalidrafi6/spacemacs-android")
+  (spacemacs-buffer//center-line)
+  (insert "\n")
+  (widget-create 'push-button
                  :tag (propertize "Release Notes"
                                   'face 'font-lock-preprocessor-face)
                  :help-echo "Hide or show the Changelog"
@@ -1006,6 +1053,7 @@ REAL-WIDTH: the real width of the line.  If the line contains an image, the size
                  :mouse-face 'highlight
                  :follow-link "\C-m")
   (insert " ")
+
   (widget-create 'url-link
                  :tag (propertize "Search in Spacemacs"
                                   'face 'font-lock-function-name-face)
@@ -1580,7 +1628,7 @@ can be adjusted with the variable:
   (with-current-buffer (get-buffer spacemacs-buffer-name)
     (when dotspacemacs-startup-lists
       (spacemacs-buffer/insert-startup-lists))
-    (spacemacs-buffer//insert-footer)
+    ;; (spacemacs-buffer//insert-footer)
     (when-let* ((obsolete-vars (spacemacs//check-obsolete-variables)))
       (mapcan #'spacemacs-buffer/error obsolete-vars))
     (if configuration-layer-error-count
@@ -1632,7 +1680,7 @@ If a prefix argument is given, switch to it in an other, possibly new window."
             (spacemacs-buffer//notes-redisplay-current-note)
             (when dotspacemacs-startup-lists
               (spacemacs-buffer/insert-startup-lists))
-            (spacemacs-buffer//insert-footer)
+            ;; (spacemacs-buffer//insert-footer)
             (configuration-layer/display-summary)
             (spacemacs-buffer/set-mode-line spacemacs--default-mode-line)
             (force-mode-line-update)

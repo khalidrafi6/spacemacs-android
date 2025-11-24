@@ -64,7 +64,6 @@
   - [[#spacemacs-modeline][Spacemacs-modeline]]
   - [[#spacemacs-navigation][Spacemacs-navigation]]
   - [[#spacemacs-org][Spacemacs-org]]
-  - [[#spacemacs-project][Spacemacs-project]]
   - [[#spacemacs-purpose][Spacemacs-purpose]]
   - [[#spacemacs-visual][Spacemacs-visual]]
 - [[#music][Music]]
@@ -237,6 +236,7 @@
   - [[#node][Node]]
   - [[#pandoc][Pandoc]]
   - [[#pass][Pass]]
+  - [[#projectile][Projectile]]
   - [[#prettier][Prettier]]
   - [[#prodigy][Prodigy]]
   - [[#puppet][Puppet]]
@@ -1024,15 +1024,6 @@ Features:
 - Support for automatically generated Table-Of-Contents via =toc-org=.
 - Support for custom bullet markers via =org-superstar=.
 - Support for a special view mode for org documents via =space-doc=.
-
-** Spacemacs-project
-[[file:+spacemacs/spacemacs-project/README.org][+spacemacs/spacemacs-project/README.org]]
-
-This layer tweaks =projectile= to integrate nicely into Spacemacs.
-
-Features:
-- Setup of =projectile= key bindings, including functions for project search, switching, version control and compilation.
-- Additional path helper functions, to copy the location of a buffer relative to the project root.
 
 ** Spacemacs-purpose
 [[file:+spacemacs/spacemacs-purpose/README.org][+spacemacs/spacemacs-purpose/README.org]]
@@ -3097,6 +3088,15 @@ Features:
 - Support for OTP via (password-store-otp)
 - Use password-store as an Emacs auth source (auth-source-pass)
   See [[https://www.gnu.org/software/emacs/manual/html_node/auth/The-Unix-password-store.html][its info page]] for more details on using it.
+
+** Projectile
+[[file:+spacemacs/spacemacs-project/README.org][+tools/projectile/README.org]]
+
+This layer tweaks =projectile= to integrate nicely into Spacemacs.
+
+Features:
+- Setup of =projectile= key bindings, including functions for project search, switching, version control and compilation.
+- Additional path helper functions, to copy the location of a buffer relative to the project root.
 
 ** Prettier
 [[file:+tools/prettier/README.org][+tools/prettier/README.org]]

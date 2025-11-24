@@ -25,6 +25,8 @@
 ;; Navigation
 ;; ---------------------------------------------------------------------------
 
+;; Always display on-screen keyboard for better navigation with Spacemacs on Android
+(setq touch-screen-display-keyboard 1)
 ;; Auto refresh
 (global-auto-revert-mode 1)
 ;; Also auto refresh dired, but be quiet about it
@@ -114,6 +116,11 @@ It runs `tabulated-list-revert-hook', then calls `tabulated-list-print'."
 ;; Edit
 ;; ---------------------------------------------------------------------------
 
+;; Disable text conversion for vim and hybrid editing styles to fix text being inserted in buffer always
+
+(when (or (eq dotspacemacs-editing-style 'vim)
+          (eq dotspacemacs-editing-style 'hybrid))
+  (setq overriding-text-conversion-style nil))
 ;; bump of the undo limits to avoid issues with premature
 ;; Emacs GC which truncates the undo history very aggressively
 (setq-default
@@ -173,8 +180,21 @@ or `nil' to only save and not visit the file."
 ;; UI
 ;; ---------------------------------------------------------------------------
 
+;; Enable GUI elements for better navigation on Android
+(menu-bar-mode 1)
+(tooltip-mode 1)
+(tool-bar-mode 1)
+(modifier-bar-mode 1)
+(setopt tool-bar-position 'bottom)
+;; Enable visual line-based editing with word wrap since Android has smaller screens
+(global-visual-line-mode 1)
+;; Also enable visual wrap prefix mode globally for wrapped lines to look better
+(global-visual-wrap-prefix-mode 1)
+
+
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
+
 ;; Show column number in mode line
 (setq column-number-mode t)
 
@@ -293,3 +313,6 @@ variables (see `savehist-mode' and `savehist-additional-variables')."
 
 ;; Suppress the *Warnings* buffer when native compilation shows warnings.
 (setq native-comp-async-report-warnings-errors 'silent)
+
+;; Set Bash from Termux as the default shell for Android
+(setq shell-file-name (conc-prefix "/bin/bash"))

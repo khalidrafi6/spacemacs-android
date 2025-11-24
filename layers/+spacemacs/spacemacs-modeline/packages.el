@@ -25,7 +25,10 @@
       '(
         (doom-modeline :toggle (eq (spacemacs/get-mode-line-theme-name) 'doom))
         fancy-battery
-        (spaceline :toggle (spacemacs//enable-spaceline-p))
+        (spaceline :location (recipe
+                              :fetcher github
+                              :repo "khalidrafi6/spaceline-android")
+                   :toggle (spacemacs//enable-spaceline-p))
         (spaceline-all-the-icons :toggle (eq (spacemacs/get-mode-line-theme-name) 'all-the-icons))
         symon
         (powerline :toggle (eq (spacemacs/get-mode-line-theme-name) 'vim-powerline))
@@ -142,7 +145,7 @@
 
 (defun spacemacs-modeline/pre-init-spaceline-all-the-icons ()
   (when (eq 'all-the-icons (spacemacs/get-mode-line-theme-name))
-    (spacemacs|use-package-add-hook spaceline
+    (spacemacs|use-package-add-hook spaceline-config
       :pre-config
       (progn
         (require 'spaceline-all-the-icons)
