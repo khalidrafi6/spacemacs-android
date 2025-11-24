@@ -20,6 +20,79 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(defun spacemacs--project-directory-path ()
+  "Retrieve the directory path relative to project root using the Emacs project package.
+Fallback to `list-buffers-directory` if buffer is not visiting a file."
+  (when-let* ((directory-name (if-let* ((file-name (buffer-file-name)))
+                                  (file-name-directory file-name)
+                                list-buffers-directory))
+              )
+    (file-relative-name
+     (file-truename directory-name)
+     (project-root (project-current t)))))
+
+(defun spacemacs--project-file-path ()
+  "Retrieve the file path relative to project root using the Emacs project package."
+  (when-let* ((file-name (buffer-file-name))
+              )
+    (file-relative-name
+     (file-truename file-name)
+     (project-root (project-current t)))))
+
+(defun spacemacs--project-file-path-with-line ()
+  "Retrieve the file path relative to project root, including line number, using project."
+  (when-let* ((file-path (spacemacs--project-file-path)))
+    (concat file-path ":" (number-to-string (line-number-at-pos)))))
+
+(defun spacemacs--project-file-path-with-line-column ()
+  "Retrieve the file path relative to project root, including line and column number, using project.
+Respects `column-number-indicator-zero-based`."
+  (when-let* ((file-path (spacemacs--project-file-path-with-line)))
+    (format "%s:%s" file-path
+            (+ (current-column) (if column-number-indicator-zero-based 0 1)))))
+
+
+
+(defun spacemacs/project-copy-directory-path ()
+  "Copy and show the directory path relative to project root (using project.el)."
+  (interactive)
+  (if-let* ((directory-path (spacemacs--project-directory-path)))
+      (progn
+        (kill-new directory-path)
+        (message "%s" directory-path))
+    (message "WARNING: Current buffer does not have a directory!")))
+
+(defun spacemacs/project-copy-file-path ()
+  "Copy and show the file path relative to project root (using project.el)."
+  (interactive)
+  (if-let* ((file-path (spacemacs--project-file-path)))
+      (progn
+        (kill-new file-path)
+        (message "%s" file-path))
+    (message "WARNING: Current buffer is not visiting a file!")))
+
+(defun spacemacs/project-copy-file-path-with-line ()
+  "Copy and show the file path relative to project root, including line number (using project.el)."
+  (interactive)
+  (if-let* ((file-path (spacemacs--project-file-path-with-line)))
+      (progn
+        (kill-new file-path)
+        (message "%s" file-path))
+    (message "WARNING: Current buffer is not visiting a file!")))
+
+(defun spacemacs/project-copy-file-path-with-line-column ()
+  "Copy and show the file path relative to project root, including line and column number (using project.el)."
+  (interactive)
+  (if-let* ((file-path (spacemacs--project-file-path-with-line-column)))
+      (progn
+        (kill-new file-path)
+        (message "%s" file-path))
+    (message "WARNING: Current buffer is not visiting a file!")))
+
+
+
+
+
 
 (defun spacemacs--projectile-directory-path ()
   "Retrieve the directory path relative to project root.
@@ -35,8 +108,8 @@ Returns:
                                   (file-name-directory file-name)
                                 list-buffers-directory)))
     (file-relative-name
-      (file-truename directory-name)
-      (projectile-project-root))))
+     (file-truename directory-name)
+     (projectile-project-root))))
 
 (defun spacemacs--projectile-file-path ()
   "Retrieve the file path relative to project root.

@@ -21,7 +21,40 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 (defconst spacemacs-project-packages
-  '(projectile))
+  '(
+    (project :toggle (eq 'project spacemacs-project-manager))
+    (projectile :toggle (eq 'projectile spacemacs-project-manager))
+    ))
+
+
+(defun spacemacs-project/init-project ()
+  (use-package project
+    :config
+    (spacemacs/set-leader-keys
+      ;; File path
+      "fyC" 'spacemacs/project-copy-file-path-with-line-column
+      "fyD" 'spacemacs/project-copy-directory-path
+      "fyL" 'spacemacs/project-copy-file-path-with-line
+      "fyY" 'spacemacs/project-copy-file-path
+      ;; Project
+      "p!" 'project-shell-command
+      "p&" 'project-async-shell-command
+      "pb" 'project-switch-to-buffer
+      "pc" 'project-compile
+      "pd" 'project-find-dir
+      "pD" 'project-dired
+      "pe" 'project-eshell
+      "pf" 'project-find-file
+      "pF" 'project-or-external-find-file
+      "pg" 'project-find-regexp
+      "pG" 'project-or-external-find-regexp
+      "pk" 'project-kill-buffers
+      "po" 'project-any-command
+      "pp" 'project-switch-project
+      "pr" 'project-query-replace-regexp
+      "ps" 'project-shell
+      "pv" 'project-vc-dir
+      "px" 'project-execute-extended-command)))
 
 (defun spacemacs-project/init-projectile ()
   (use-package projectile
