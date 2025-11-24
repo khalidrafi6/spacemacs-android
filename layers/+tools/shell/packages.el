@@ -37,6 +37,7 @@
     magit
     multi-term
     org
+    project
     projectile
     (shell :location built-in)
     shell-pop
@@ -199,6 +200,11 @@
 (defun shell/pre-init-org ()
   (spacemacs|use-package-add-hook org
     :post-config (add-to-list 'org-babel-load-languages '(shell . t))))
+
+(defun shell/post-init-project ()
+  (spacemacs/set-leader-keys
+    "p'" #'spacemacs/project-shell-pop
+    "p$" #'spacemacs/project-shell))
 
 (defun shell/post-init-projectile ()
   (spacemacs/set-leader-keys

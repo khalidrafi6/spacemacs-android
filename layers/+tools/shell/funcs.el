@@ -20,6 +20,29 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(defun spacemacs/project-shell-pop ()
+  "Pop-up a shell buffer at the project root (using project.el)."
+  (interactive)
+  (let ((default-directory (if (project-current)
+                               (project-root (project-current))
+                             default-directory)))
+    (call-interactively 'spacemacs/default-pop-shell)))
+
+(defun spacemacs/project-shell ()
+  "Create a shell buffer at the project root and switch to it (using project.el)."
+  (interactive)
+  (let ((project-root (if (project-current)
+                          (project-root (project-current))
+                        default-directory)))
+    (pcase shell-default-shell
+      ((or 'multi-term 'multi-vterm)
+       (let ((default-directory project-root))
+         (call-interactively shell-default-shell)))
+      ('eat (call-interactively #'eat-project))
+      (_ (let ((default-directory project-root))
+           (call-interactively (or (intern-soft (format "project-run-%s" shell-default-shell))
+                                   #'project-shell)))))))
+
 
 (defun spacemacs/projectile-shell-pop ()
   "Pop-up a shell buffer at the project root.
@@ -307,8 +330,8 @@ tries to restore a dead buffer or window."
   (interactive)
   (cl-assert (string-equal mode-name "VTerm") nil "Not in VTerm mode")
   (helm :sources (helm-build-sync-source "Bash history"
-                   :candidates (spacemacs//vterm-make-history-candidates)
-                   :action #'vterm-send-string)
+                                         :candidates (spacemacs//vterm-make-history-candidates)
+                                         :action #'vterm-send-string)
         :buffer "*helm-bash-history*"
         :candidate-number-limit 10000))
 
