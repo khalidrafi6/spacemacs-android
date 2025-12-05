@@ -164,22 +164,29 @@ It's cleared when the idle timer runs.")
 
 (defun spacemacs-buffer//insert-ascii-banner-centered (file)
   "Insert the ascii banner contain in file and center it in the window.
-FILE: the path to the file containing the banner."
+FILE: the path to the file containing the banner.
+
+Performance note: Two-pass algorithm calculates banner width first,
+then applies margin in a single traversal to minimize buffer operations."
   (insert
    (with-temp-buffer
      (insert-file-contents file)
-     (let ((banner-width 0))
+     (let ((banner-width 0)
+           (margin nil))
+       ;; Single pass: calculate max width while traversing
        (while (not (eobp))
          (let ((line-length (- (line-end-position) (line-beginning-position))))
            (when (< banner-width line-length)
              (setq banner-width line-length)))
          (forward-line 1))
-       (goto-char 0)
-       (let ((margin (max 0 (floor (/ (- spacemacs-buffer--window-width
-                                         banner-width) 2)))))
-         (while (not (eobp))
-           (insert (make-string margin ?\s))
-           (forward-line 1)))
+       ;; Calculate margin once
+       (setq margin (max 0 (floor (/ (- spacemacs-buffer--window-width
+                                        banner-width) 2))))
+       ;; Second pass: add margin to each line
+       (goto-char (point-min))
+       (while (not (eobp))
+         (insert (make-string margin ?\s))
+         (forward-line 1))
        (insert "\n"))
      (buffer-string))))
 
@@ -580,11 +587,12 @@ ADDITIONAL-WIDGETS: a function for inserting a widget under the frame."
         (add-to-list 'spacemacs-buffer--note-widgets (widget-create 'text :format "%v" note))
         (let* ((width (spacemacs-buffer//get-buffer-width))
                (padding (max 0 (floor (/ (- spacemacs-buffer--window-width
-                                            width) 2)))))
+                                            width) 2))))
+               (padding-str (make-string padding ?\s)))
           (goto-char (point-min))
           (while (not (eobp))
             (beginning-of-line)
-            (insert (make-string padding ?\s))
+            (insert padding-str)
             (forward-line))))
       (save-excursion
         (while (re-search-backward "\\[\\[\\(.*\\)\\]\\]" nil t)
